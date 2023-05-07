@@ -22,11 +22,12 @@
 <body>
   <nav id="nav-bar"></nav>
   <main id="main-content"></main>
+  <%- include('partials/_todo.ejs') %>
   <script defer src="/scripts/views_manager.js"></script>
   <script defer src="/scripts/nav.js"></script>
   <script defer src="/scripts/landing.js"></script>
-  <script defer src="/scripts/login_form.js"></script>
   <script defer src="/scripts/register_form.js"></script>
+  <script defer src="/scripts/login_form.js"></script>
   <%- showIndex %>
 
 </body>
