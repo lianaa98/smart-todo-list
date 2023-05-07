@@ -52,12 +52,16 @@ app.use('/users', usersRoutes);
 
 app.get('/', (req, res) => {
   const userId = req.session.userId;
+  const templateVars = {};
+  templateVars.showIndex = `<script defer src="/scripts/index_loggedin.js"></script>`;
 
   // When user is logged out
   if (!userId) {
     // Direct to the login page
-    // return res.send({ message: "not logged in" });
-    res.render('index');
+    console.log('Logged out');
+    templateVars.showIndex = `<script defer src="/scripts/index_loggedout.js"></script>`;
+    res.render('index', templateVars);
+    return;
   }
 
   // When user is logged in (has cookie)
@@ -68,13 +72,7 @@ app.get('/', (req, res) => {
         return res.send({ error: "no user with that id" });
       }
 
-      res.send({
-        user: {
-          name: user.name,
-          email: user.email,
-          id: userId,
-        },
-      });
+      res.render('index', templateVars);
     })
     .catch((e) => res.send(e));
   

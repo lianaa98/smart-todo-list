@@ -31,7 +31,7 @@ $(() => {
           return;
         }
         console.log(json.user);
-        header.update(json.user);
+        // header.update(json.user); // Not used yet, but maybe a nav would be in the future
         views_manager.show('landing');
       });
   });
