@@ -1,7 +1,7 @@
 $(() => {
 
   const $landing = $(`
-<p> LANDING </p>
+  <p> TODO: </p>
 
   `);
 
