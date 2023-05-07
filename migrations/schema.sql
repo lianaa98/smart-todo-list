@@ -10,16 +10,16 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE things (
   id SERIAL PRIMARY KEY NOT NULL,
-  category_id INTEGER REFERENCES category(id) ON DELETE CASCADE,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   --importance_id INTEGER REFERENCES importances(id) ON DELETE CASCADE, --stretch
   created_at TIMESTAMP,
-  completed_at TIMESTAMP,
+  completed_at TIMESTAMP
 );
-
-create table categories {
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL
-}
