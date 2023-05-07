@@ -78,28 +78,6 @@ app.get('/', (req, res) => {
   
 });
 
-// const findUserFromEmail = (email) => {
-//   return pool
-//     .query(`SELECT *
-//     FROM users
-//     WHERE email = $1;`, [email])
-//     .then((result) => {
-
-//       // Invalid email
-//       if (result.rows.length === 0) {
-//         console.log('invalid query', result.rows);
-//         return null;
-//       }
-
-//       // email found
-//       console.log('query', result.rows[0]);
-//       return result.rows[0];
-//     })
-//     .catch((err) => {
-//       console.log(err.message);
-//     });
-// };
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
