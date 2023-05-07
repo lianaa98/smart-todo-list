@@ -1,6 +1,14 @@
 // See: https://sass-lang.com/
+$primary-color: linear-gradient(227deg,
+    rgba(195, 124, 34, 1) 0%, rgba(253, 187, 45, 1) 100%);
 
-body,
 html {
+  box-sizing: border-box;
   margin: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
