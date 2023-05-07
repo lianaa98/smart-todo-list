@@ -78,6 +78,10 @@ app.get('/', (req, res) => {
   
 });
 
+app.get("/scripts/landing.js", (req, res) => {
+  res.render('scripts/landing-script.ejs');
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
