@@ -79,7 +79,7 @@ app.get('/', (req, res) => {
 });
 
 app.get("/scripts/landing.js", (req, res) => {
-  res.render('scripts/landing-script.ejs');
+  res.render('scripts/landing.ejs');
 });
 
 app.listen(PORT, () => {
