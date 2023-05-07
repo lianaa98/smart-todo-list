@@ -1,6 +1,7 @@
 $(() => {
 
   const $main = $('#main-content');
+  const $navbar = $("#nav-bar");
 
   window.views_manager = {};
 
@@ -11,6 +12,8 @@ $(() => {
 
     switch (item) {
       case 'landing': 
+      $navbar.addClass("nav-bar");
+        $nav.appendTo($navbar);
         $landing.appendTo($main);
         break;
       case 'logIn':

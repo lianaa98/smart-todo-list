@@ -1,7 +1,8 @@
 $(() => {
 
   const $landing = $(`
-  <p>Landing page!</p>
+  <p> TODO: </p>
+
   `);
 
   window.$landing = $landing;

@@ -17,9 +17,10 @@ CREATE TABLE categories (
 
 CREATE TABLE things (
   id SERIAL PRIMARY KEY NOT NULL,
+  content TEXT NOT NULL,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  --importance_id INTEGER REFERENCES importances(id) ON DELETE CASCADE, --stretch
   created_at TIMESTAMP,
   completed_at TIMESTAMP
+  --importance_id INTEGER REFERENCES importances(id) ON DELETE CASCADE, --stretch
 );
