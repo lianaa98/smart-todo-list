@@ -1,7 +1,7 @@
 // load .env data into process.env
 require('dotenv').config();
 
-// Web server config
+// Web server and database config
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
@@ -51,14 +51,33 @@ app.use('/users', usersRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  // When user is logged in (has cookie)
+  const userId = req.session.userId;
 
   // When user is logged out
-  /* const templateVars = {
-    user: users[req.session.userID],
-  };
-  res.render("urls_registration", templateVars); */
-  res.render('index');
+  if (!userId) {
+    // Direct to the login page
+    // return res.send({ message: "not logged in" });
+    res.render('index');
+  }
+
+  // When user is logged in (has cookie)
+  database
+    .getUserWithId(userId)
+    .then((user) => {
+      if (!user) {
+        return res.send({ error: "no user with that id" });
+      }
+
+      res.send({
+        user: {
+          name: user.name,
+          email: user.email,
+          id: userId,
+        },
+      });
+    })
+    .catch((e) => res.send(e));
+  
 });
 
 // const findUserFromEmail = (email) => {

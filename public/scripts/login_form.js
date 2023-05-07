@@ -13,7 +13,6 @@ $(() => {
 
       <div class="login-form__field-wrapper">
           <button>Login</button>
-          <a id="login-form__cancel" href="#">Cancel</a>
       </div>
     </form>
   `);
@@ -33,12 +32,12 @@ $(() => {
         }
         console.log(json.user);
         header.update(json.user);
-        views_manager.show('listings');
+        views_manager.show('landing');
       });
   });
 
   $('body').on('click', '#login-form__cancel', function() {
-    views_manager.show('listings');
+    views_manager.show('landing');
     return false;
   });
       

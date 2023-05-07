@@ -5,10 +5,14 @@ $(() => {
   window.views_manager = {};
 
   window.views_manager.show = function(item) {
+    $landing.detach();
     $logInForm.detach();
     $registerForm.detach();
 
     switch (item) {
+      case 'landing': 
+        $landing.appendTo($main);
+        break;
       case 'logIn':
         $logInForm.appendTo($main);
         break;
