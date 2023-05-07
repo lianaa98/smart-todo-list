@@ -5,6 +5,7 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const cookieSession = require('cookie-session');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,6 +26,10 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['secretkey1', 'secondsecretkey2'],
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -53,6 +58,42 @@ app.get('/', (req, res) => {
   };
   res.render("urls_registration", templateVars); */
   res.render('index');
+});
+
+const findUserFromEmail = (email) => {
+  return pool
+    .query(`SELECT *
+    FROM users
+    WHERE email = $1;`, [email])
+    .then((result) => {
+
+      // Invalid email
+      if (result.rows.length === 0) {
+        console.log('invalid query', result.rows);
+        return null;
+      }
+
+      // email found
+      console.log('query', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+// LOGIN (POST)
+app.post("/login", (req, res) => {
+  const user = findUserFromEmail(req.body.email, users);
+
+  // Error checking - e-mail / password not matching
+  if (!user || !bcrypt.compareSync(req.body.password, user.hashedPassword)) {
+    res.status(401).send("Invalid e-mail / password.");
+    return;
+  }
+
+  req.session.userID = user.id;
+  res.redirect('/urls');
 });
 
 app.listen(PORT, () => {
