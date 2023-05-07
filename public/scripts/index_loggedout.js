@@ -1,3 +1,3 @@
 $(() => {
-    views_manager.show('logIn');
+    views_manager.show('signUp');
 });

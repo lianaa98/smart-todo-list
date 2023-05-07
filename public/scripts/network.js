@@ -1,3 +1,10 @@
+function getMyDetails() {
+  console.log("getMyDetails");
+  return $.ajax({
+    url: "/users/me",
+  });
+}
+
 function logOut() {
   return $.ajax({
     method: "POST",
