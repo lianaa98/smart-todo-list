@@ -13,4 +13,51 @@ const db = new Pool(dbParams);
 
 db.connect();
 
-module.exports = db;
+const getUserWithEmail = (email) => {
+  return db
+    .query(`SELECT *
+    FROM users
+    WHERE email = $1;`, [email])
+    .then((result) => {
+
+      // Invalid email
+      if (result.rows.length === 0) {
+        console.log('invalid query', result.rows);
+        return null;
+      }
+
+      // email found
+      console.log('query', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+const getUserWithId = function(id) {
+  return db
+    .query(`SELECT *
+    FROM users
+    WHERE id = $1;`, [id])
+    .then((result) => {
+
+      // Invalid id
+      if (result.rows.length === 0) {
+        console.log('invalid query for id', result.rows);
+        return null;
+      }
+
+      // id found
+      console.log('query for id', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+module.exports = {
+  getUserWithEmail,
+  getUserWithId
+};

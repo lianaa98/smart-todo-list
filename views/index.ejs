@@ -15,10 +15,19 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <script defer src="/scripts/network.js"></script>
 </head>
 
 <body>
+  <%- include('partials/_nav') %>
   <h1>Have fun! 🥔</h1>
+  <main id="main-content"></main>
+  <!-- load our scripts after the rest of the DOM gets loaded -->
+  <script defer src="/scripts/views_manager.js"></script>
+  <script defer src="/scripts/landing.js"></script>
+  <script defer src="/scripts/login_form.js"></script>
+  <script defer src="/scripts/register_form.js"></script>
+  <%- showIndex %>
 </body>
 
 </html>

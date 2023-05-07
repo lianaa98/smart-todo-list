@@ -1,10 +1,12 @@
 // load .env data into process.env
 require('dotenv').config();
 
-// Web server config
+// Web server and database config
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const cookieSession = require('cookie-session');
+const database = require('./db/connection');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,6 +27,10 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['secretkey1', 'secondsecretkey2'],
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -45,8 +51,54 @@ app.use('/users', usersRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const userId = req.session.userId;
+  const templateVars = {};
+  templateVars.showIndex = `<script defer src="/scripts/index_loggedin.js"></script>`;
+
+  // When user is logged out
+  if (!userId) {
+    // Direct to the login page
+    console.log('Logged out');
+    templateVars.showIndex = `<script defer src="/scripts/index_loggedout.js"></script>`;
+    res.render('index', templateVars);
+    return;
+  }
+
+  // When user is logged in (has cookie)
+  database
+    .getUserWithId(userId)
+    .then((user) => {
+      if (!user) {
+        return res.send({ error: "no user with that id" });
+      }
+
+      res.render('index', templateVars);
+    })
+    .catch((e) => res.send(e));
+  
 });
+
+// const findUserFromEmail = (email) => {
+//   return pool
+//     .query(`SELECT *
+//     FROM users
+//     WHERE email = $1;`, [email])
+//     .then((result) => {
+
+//       // Invalid email
+//       if (result.rows.length === 0) {
+//         console.log('invalid query', result.rows);
+//         return null;
+//       }
+
+//       // email found
+//       console.log('query', result.rows[0]);
+//       return result.rows[0];
+//     })
+//     .catch((err) => {
+//       console.log(err.message);
+//     });
+// };
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
