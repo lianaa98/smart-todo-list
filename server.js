@@ -45,6 +45,13 @@ app.use('/users', usersRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
+  // When user is logged in (has cookie)
+
+  // When user is logged out
+  /* const templateVars = {
+    user: users[req.session.userID],
+  };
+  res.render("urls_registration", templateVars); */
   res.render('index');
 });
 
