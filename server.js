@@ -72,6 +72,8 @@ app.get('/', (req, res) => {
         return res.send({ error: "no user with that id" });
       }
 
+      templateVars.username = user.name;
+
       res.render('index', templateVars);
     })
     .catch((e) => res.send(e));
