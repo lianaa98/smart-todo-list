@@ -9,11 +9,6 @@ const express = require('express');
 const router  = express.Router();
 const database = require('../db/connection');
 
-// LOGIN (GET)
-// router.get("/login", (req, res) => {
-//   res.status(200).send({message: "test"});
-// });
-
 // LOGIN (POST)
 router.post("/login", (req, res) => {
   database.getUserWithEmail(req.body.email)
@@ -34,6 +29,47 @@ router.post("/login", (req, res) => {
       });
     })
 
+});
+
+// REGISTER (POST)
+router.post("/", (req, res) => {
+  const user = req.body;
+  database
+    .addUser(user)
+    .then((user) => {
+      if (!user) {
+        return res.send({ error: "error" });
+      }
+
+      req.session.userId = user.id;
+      res.send("🤗"); // don't send user data here; make a different route (users/me) do the work of retrieving user data
+    })
+    .catch((e) => res.send(e));
+});
+
+// Return information about the current user (based on cookie value)
+router.get("/me", (req, res) => {
+  const userId = req.session.userId;
+  if (!userId) {
+    return res.send({ message: "not logged in" });
+  }
+
+  database
+    .getUserWithId(userId)
+    .then((user) => {
+      if (!user) {
+        return res.send({ error: "no user with that id" });
+      }
+
+      res.send({
+        user: {
+          name: user.name,
+          email: user.email,
+          id: userId,
+        },
+      });
+    })
+    .catch((e) => res.send(e));
 });
 
 router.get('/', (req, res) => {

@@ -57,7 +57,31 @@ const getUserWithId = function(id) {
     });
 };
 
+const addUser = function(user) {
+
+  return db
+    .query(`INSERT INTO users (name, email, password)
+    VALUES ($1, $2, $3)
+    RETURNING *;`, [user.name, user.email, user.password])
+    .then((result) => {
+      // Invalid insertion
+      if (result.rows.length === 0) {
+        console.log('invalid query for insertion', result.rows);
+        return null;
+      }
+
+      // valid insertion
+      console.log('query for insertion', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
 module.exports = {
   getUserWithEmail,
-  getUserWithId
+  getUserWithId,
+  addUser
 };

@@ -16,10 +16,9 @@ $(() => {
             <input type="password" name="password" placeholder="Password">
           </div>
   
-        <div class="sign-up-form__field-wrapper">
-            <button>Sign Up</button>
-            <a id="sign-up-form__cancel" href="#">Cancel</a>
-        </div>
+          <div class="sign-up-form__field-wrapper">
+              <button>Sign Up</button>
+          </div>
       </form>
   `);
   window.$registerForm = $registerForm;
@@ -31,14 +30,9 @@ $(() => {
     signUp(data)
       .then(getMyDetails)
       .then((json) => {
-        header.update(json.user);
-        views_manager.show('listings');
+        // header.update(json.user); // Not used yet, but maybe a nav would be in the future
+        views_manager.show('landing');
       });
-  });
-
-  $('body').on('click', '#sign-up-form__cancel', function() {
-    views_manager.show('listings');
-    return false;
   });
       
 });
