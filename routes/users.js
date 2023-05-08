@@ -6,43 +6,35 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const database = require('../db/connection');
 
-// LOGIN (POST)
+// LOGIN (POST) -> redirects to /users/me
 router.post("/login", (req, res) => {
   database.getUserWithEmail(req.body.email)
     .then((user) => {
-      console.log(user);
-      const templateVars = {
-        user: user
-      }
-
       // Error checking - e-mail / password not matching
       if (!user || !(req.body.password === user.password)) {
         res.status(401).send("Invalid e-mail / password.");
         return;
       }
-
       req.session.userId = user.id;
-      res.render('user_index', templateVars);
-    })
-
+      res.redirect('/users/me');
+    });
 });
 
-// REGISTER (POST)
+// REGISTER (POST) -> redirects to /users/me
 router.post("/", (req, res) => {
   const user = req.body;
-  console.log(user)
+  console.log(user);
   database
     .addUser(user)
     .then((user) => {
       if (!user) {
         return res.send({ error: "error" });
       }
-
       req.session.userId = user.id;
-      res.send("🤗"); // don't send user data here; make a different route (users/me) do the work of retrieving user data
+      res.redirect('/users/me');
     })
     .catch((e) => res.send(e));
 });
@@ -61,19 +53,17 @@ router.get("/me", (req, res) => {
         return res.send({ error: "no user with that id" });
       }
 
-      res.send({
-        user: {
-          name: user.name,
-          email: user.email,
-          id: userId,
-        },
-      });
+      const templateVars = {
+        user: user
+      };
+
+      res.render('user_index', templateVars);
     })
     .catch((e) => res.send(e));
 });
 
-router.get('/', (req, res) => {
-  res.render('users');
-}); 
+// router.get('/', (req, res) => {
+//   res.render('users');
+// });
 
 module.exports = router;
