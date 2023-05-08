@@ -53,12 +53,15 @@ router.post('/', async (req, res) => {
     user_id: userId
   }
   
+  res.status(200);
   database.addTodoItem(newToDoThing);
+
+  const results = await database.getAllTodoItems(userId);
+  return results;
 });
 
-router.get('/', (req, res) => {
-  const userId = req.session.userId;
-  console.log(database.getAllTodoItems(userId));
-})
+// router.get('/', (req, res) => {
+//   const userId = req.session.userId;
+// })
 
 module.exports = router;
