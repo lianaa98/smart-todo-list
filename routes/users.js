@@ -33,6 +33,7 @@ router.post("/login", (req, res) => {
 // REGISTER (POST)
 router.post("/", (req, res) => {
   const user = req.body;
+  console.log(user)
   database
     .addUser(user)
     .then((user) => {

@@ -61,12 +61,16 @@
 
     <form id="register-form" method="POST" action="/users/">
       <div class="form-group">
+        <label for="loginName">Your name</label>
+        <input type="name" class="form-control" id="loginName" name="name">
+      </div>
+      <div class="form-group">
         <label for="loginEmail">Email address</label>
-        <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+        <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
       </div>
       <div class="form-group">
         <label for="loginPassword">Password</label>
-        <input type="password" class="form-control" id="loginPassword">
+        <input type="password" class="form-control" id="loginPassword" name="password">
       </div>
       <button id="register-button" type="submit" class="btn btn-primary">Register</button>
     </form>
