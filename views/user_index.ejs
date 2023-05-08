@@ -45,15 +45,23 @@
     <p>SMART TODO</p>
     <div id="categories">
       <ul>
-<li>To Watch</li>
-<li>To Read</li>
-<li>To Eat</li>
-<li>To Buy</li>
+        <li>To Watch</li>
+        <li>To Read</li>
+        <li>To Eat</li>
+        <li>To Buy</li>
       </ul>
     </div>
   </nav>
   <div id="content">
-<p>Hi, <%= user.name%></p>
+    <p>Hi, <%= user.name%>
+    </p>
+    <form id="new-todo-form" method="POST" action="/api/users/">
+      <div class="form-group">
+        <label for="new-todo"></label>
+        <input type="text" class="form-control" id="new-todo" name="thing">
+      </div>
+      <button id="todo-button" type="submit" class="btn btn-primary">To Do!</button>
+    </form>
     <div id="scroll">
       Your Todo List: <br> a <br>
       Your Todo List: <br> a <br>

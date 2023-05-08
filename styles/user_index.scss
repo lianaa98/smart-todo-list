@@ -41,6 +41,50 @@
   }
 }
 
+#new-todo-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 50px;
+  input {
+    font-family: 'Darumadrop One', cursive;
+    border: none;
+    resize: none;
+    outline: none;
+    border-bottom: #3a3b43;
+    border-bottom-style: solid;
+    background-color: transparent;
+  }
+  button {
+    align-self: flex-end;
+    width: 80px;
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 -4px 4px 0 0;
+    color: #422800;
+    font-family: 'Darumadrop One', cursive;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 20px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  button:hover {
+    background-color: #fff;
+  }
+
+  button:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+}
+
 #content {
   display: flex;
   flex-direction: column;
@@ -63,6 +107,7 @@
   display: flex;
   border-radius: 10px;
   width: 80%;
+  margin-top: 50px;
   margin-left: 50px;
 
   box-shadow: -10px 10px 10px 0px black;
