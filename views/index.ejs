@@ -47,9 +47,20 @@
     <button id="log-in-button" class="button-1" role="button">Log In</button>
   </div>
   <!-- User Login/Register Forms (Hidden) -->
-  <!-- <div id="user-forms"> -->
-  <div id="login-form">
-    <form>
+
+    <form id="login-form" method="POST" action="/users/login">
+      <div class="form-group">
+        <label for="loginEmail">Email address</label>
+        <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" class="form-control" id="loginPassword" name="password">
+      </div>
+      <button id="sign-in-button" type="submit" class="btn btn-primary">Log in</button>
+    </form>
+
+    <form id="register-form" method="POST" action="/users/">
       <div class="form-group">
         <label for="loginEmail">Email address</label>
         <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
@@ -58,23 +69,8 @@
         <label for="loginPassword">Password</label>
         <input type="password" class="form-control" id="loginPassword">
       </div>
-      <button type="submit" class="btn btn-primary">Log in</button>
+      <button id="register-button" type="submit" class="btn btn-primary">Register</button>
     </form>
-  </div>
-  <div id="register-form">
-    <form>
-      <div class="form-group">
-        <label for="loginEmail">Email address</label>
-        <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
-      </div>
-      <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" class="form-control" id="loginPassword">
-      </div>
-      <button type="submit" class="btn btn-primary">Register</button>
-    </form>
-  </div>
-  <!-- </div> -->
 
 
 </body>

@@ -13,6 +13,7 @@ const database = require('../db/connection');
 router.post("/login", (req, res) => {
   database.getUserWithEmail(req.body.email)
     .then((user) => {
+      console.log(user);
       // Error checking - e-mail / password not matching
       if (!user || !(req.body.password === user.password)) {
         res.status(401).send("Invalid e-mail / password.");
