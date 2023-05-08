@@ -14,6 +14,7 @@
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/user_index.css" />
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -39,43 +40,29 @@
 
 </head>
 
-<body>
-  <div id="header">Smart TODO</div>
-  <div id="landing-buttons">
-    <button id="sign-up-button" class="button-1" role="button">Sign Up</button>
-    <button id="log-in-button" class="button-1" role="button">Log In</button>
+<body id="userIndexBody">
+  <nav>
+    <p>SMART TODO</p>
+    <div id="categories">
+      <ul>
+<li>To Watch</li>
+<li>To Read</li>
+<li>To Eat</li>
+<li>To Buy</li>
+      </ul>
+    </div>
+  </nav>
+  <div id="content">
+<p>Hi, <%= user.name%></p>
+    <div id="scroll">
+      Your Todo List: <br> a <br>
+      Your Todo List: <br> a <br>
+      Your Todo List: <br> a <br>
+      Your Todo List: <br> a <br>
+
+
+    </div>
   </div>
-  <!-- User Login/Register Forms (Hidden) -->
-
-    <form id="login-form" method="POST" action="/users/login">
-      <div class="form-group">
-        <label for="loginEmail">Email address</label>
-        <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
-      </div>
-      <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" class="form-control" id="loginPassword" name="password">
-      </div>
-      <button id="sign-in-button" type="submit" class="btn btn-primary">Log in</button>
-    </form>
-
-    <form id="register-form" method="POST" action="/users/">
-      <div class="form-group">
-        <label for="loginName">Your name</label>
-        <input type="name" class="form-control" id="loginName" name="name">
-      </div>
-      <div class="form-group">
-        <label for="loginEmail">Email address</label>
-        <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
-      </div>
-      <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" class="form-control" id="loginPassword" name="password">
-      </div>
-      <button id="register-button" type="submit" class="btn btn-primary">Register</button>
-    </form>
-
-
 </body>
 
 </html>

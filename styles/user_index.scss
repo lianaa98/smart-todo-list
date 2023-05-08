@@ -1,0 +1,73 @@
+#userIndexBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  nav {
+    position: fixed;
+    height: 100vh;
+    width: 200px;
+    border: 2px black solid;
+
+    padding: 10px 10px 10px 10px;
+
+    p {
+      padding-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      font-family: 'Bungee Shade', cursive;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    #categories {
+
+      font-family: 'Darumadrop One', cursive;
+
+      ul {
+        li {
+          display: flex;
+          align-items: center;
+          height: 100px;
+          list-style: none;
+          cursor: pointer;
+        }
+        li:hover {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  width: 100%;
+  min-height: 100vh;
+  margin-left: 200px;
+
+  p {
+    padding-left: 50px;
+    padding-top: 50px;
+    font-family: 'Darumadrop One', cursive;
+    font-size: 3em;
+  }
+
+}
+
+#scroll {
+  display: flex;
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 50px;
+
+  box-shadow: -10px 10px 10px 0px black;
+
+  background: rgb(254, 254, 254);
+  background: radial-gradient(circle, rgba(254, 254, 254, 1) 0%, rgba(233, 192, 179, 1) 100%);
+
+}
