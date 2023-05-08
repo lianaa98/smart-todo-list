@@ -81,8 +81,8 @@ const addUser = function(user) {
 const addTodoItem = function(todoObj) {
   return db
     .query(`INSERT INTO things (content, category_id, user_id, created_at)
-    VALUES ($1, $2, $3, Now())
-    RETURNING *;`, [todoObj.content, `(SELECT id FROM categories WHERE categories.name = ${todoObj.category})`, todoObj.user_id])
+    VALUES ($1, (SELECT id FROM categories WHERE categories.name = $2), $3, Now())
+    RETURNING *;`, [todoObj.content, todoObj.category_name, todoObj.user_id])
     .then((result) => {
       // Invalid insertion
       if (result.rows.length === 0) {
@@ -101,7 +101,7 @@ const addTodoItem = function(todoObj) {
 
 const getAllTodoItems = (user_id) => {
   return db
-    .query(`SELECT *
+    .query(`SELECT content, categories.name AS category_name, created_at
     FROM things
     LEFT JOIN categories ON category_id = categories.id
     WHERE user_id = $1;`, [user_id])
