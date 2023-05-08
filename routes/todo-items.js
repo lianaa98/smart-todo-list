@@ -12,6 +12,16 @@ router.get("/", (req, res) => {
     });
 });
 
+// READ - Get Todo items (GET)
+router.get("/:category_name", (req, res) => {  
+  const category_name = req.params.category_name;
+  const userId = req.session.userId;
+  database.getTodoItemsByCategory(userId, category_name)
+    .then((todoItems) => {
+      res.json(todoItems);
+    });
+});
+
 // ADD - Add Todo item (POST)
 router.post("/", (req, res) => {
   const todoItem = req.body;
