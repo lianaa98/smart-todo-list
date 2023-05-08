@@ -53,7 +53,8 @@
     </div>
   </nav>
   <div id="content">
-    <p>Hi, <%= user.name%>
+    <p>
+      Hi, <%= user.name%>
     </p>
     <form id="new-todo-form" method="POST" action="/api/users/">
       <div class="form-group">
@@ -62,13 +63,11 @@
       </div>
       <button id="todo-button" type="submit" class="btn btn-primary">To Do!</button>
     </form>
-    <div id="scroll">
+    <div id="main-todo">
       Your Todo List: <br> a <br>
       Your Todo List: <br> a <br>
       Your Todo List: <br> a <br>
       Your Todo List: <br> a <br>
-
-
     </div>
   </div>
 </body>

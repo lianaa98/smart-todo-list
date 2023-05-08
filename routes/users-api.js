@@ -7,7 +7,8 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users');
+// const userQueries = require('../db/queries/users');
+const database = require('../db/connection');
 
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
@@ -18,23 +19,31 @@ const openai = new OpenAIApi(configuration);
 
 
 router.post('/', async (req, res) => {
-  // userQueries.getUsers()
-  //   .then(users => {
-  //     res.json({ users });
-  //   })
-  //   .catch(err => {
-  //     res
-  //       .status(500)
-  //       .json({ error: err.message });
-  //   });
-  console.log("hello")
-  const response = await openai.createCompletion({
+  const userId = req.session.userId;
+
+  if (!userId) {
+    return res.send({ message: "not logged in" });
+  }
+
+  database
+    .getUserWithId(userId)
+    .then((user) => {
+      if (!user) {
+        return res.send({ error: "no user with that id" });
+      }
+    })
+    .catch((err) => res.send(err));
+
+  const plaintext = req.body.thing;
+
+  const apiResponse = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: "Say this is a test",
+    prompt: `The category of '${plaintext}' is 'to-watch', 'to-read', 'to-eat' or 'to-buy':`,
     max_tokens: 7,
     temperature: 0,
   });
-  console.log("response:", response.data.choices[0].text)
+
+  console.log("response:", apiResponse.data.choices[0].text)
 
 
 });
