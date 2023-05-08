@@ -1,0 +1,1 @@
+INSERT INTO categories (id, name) VALUES (1, 'to-watch'), (2, 'to-read'), (3, 'to-eat'), (4, 'to-buy');
