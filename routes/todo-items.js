@@ -15,11 +15,11 @@ router.get("/", (req, res) => {
 // ADD - Add Todo item (POST)
 router.post("/", (req, res) => {
   const todoItem = req.body;
+  todoItem.user_id = req.session.userId;
   /* todoItem is an object like this: 
   {
     content,
-    category_name,
-    user_id
+    category_name
   } */
   console.log('todoItem:', todoItem);
   database
