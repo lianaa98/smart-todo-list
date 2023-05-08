@@ -16,6 +16,8 @@ $(() => {
         $nav.appendTo($navbar);
         $landing.appendTo($main);
         break;
+      case 'buttons':
+        
       case 'logIn':
         $logInForm.appendTo($main);
         break;
