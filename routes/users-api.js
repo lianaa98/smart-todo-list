@@ -55,13 +55,7 @@ router.post('/', async (req, res) => {
   
   res.status(200);
   database.addTodoItem(newToDoThing);
-
-  const results = await database.getAllTodoItems(userId);
-  return results;
+  res.send();
 });
-
-// router.get('/', (req, res) => {
-//   const userId = req.session.userId;
-// })
 
 module.exports = router;

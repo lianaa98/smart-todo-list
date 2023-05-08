@@ -2,41 +2,29 @@
 $(document).ready(function() {
   console.log("document is ready!");
 
-//=======================================
-//  Appending to Todo List              ||
-//=======================================
+  //=======================================
+  //  Appending to Todo List              ||
+  //=======================================
   $("#new-todo-form").on('submit', function(event) {
     event.preventDefault();
-    console.log("HELLLOOOOO HEREEE")
+    // console.log("HELLLOOOOO HEREEE")
     console.log($(this).serialize());
 
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "/api/users",
-  //     data: $(this).serialize()
-  //   })
-
-
-
-  //   $.ajax('/api/users', { method: "GET" })
-  //   .then(function(todoObj) {
-
-  //     console.log('todoObj', todoObj);
-  //     // <input id="01" type="checkbox" name="r" value="1" checked>
-  //     // <label for="01">Bread</label>
-  //     // <input id="02" type="checkbox" name="r" value="2">
-  //     // <label for="02">Cheese</label>
-
-  //   })
-
-  //   const list = `
-  //   <p>To Do List</p>
-  //   <div id="all-checklist"></div>
-  //   `
-
-  // })
-})
-})
+    $.ajax({
+      type: "POST",
+      url: "/api/users",
+      data: $(this).serialize(),
+    })
+    .then(function() {
+      console.log("Check me here!");
+      loadTodo();
+      $("#new-todo").val("");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  });
+});
 
 //=======================================
 //  Helper Functions for rendering      ||
@@ -63,7 +51,7 @@ function createToDoElement(todoObj) {
     <option value="4">To Buy</option>
   </select>
 </div>
-  `
+  `;
   return markup;
 }
 
@@ -71,14 +59,20 @@ function renderTodo(todoArray) {
 
   $("#main-todo").empty();
 
+  console.log("rendering...");
+  console.log(todoArray);
+
   for (const todo of todoArray) {
-    const $todo = createTodoElement(todo);
-    $("#main-todo").appendChild($todo);
+    const $todo = createToDoElement(todo);
+    $("#main-todo").append($todo);
   }
 }
 
 function loadTodo() {
   console.log("loading todo list...");
 
-  $.ajax("/")
+  $.ajax("/todo-items/", { method: "GET" })
+    .then(function(todos) {
+      renderTodo(todos);
+    });
 }
