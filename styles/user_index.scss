@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: flex-start;
 
   nav {
-    min-height: 100vh;
-    width: 20%;
+    position: fixed;
+    height: 100vh;
+    width: 200px;
     border: 2px black solid;
 
     padding: 10px 10px 10px 10px;
@@ -20,6 +22,7 @@
     }
 
     #categories {
+
       font-family: 'Darumadrop One', cursive;
 
       ul {
@@ -45,6 +48,7 @@
 
   width: 100%;
   min-height: 100vh;
+  margin-left: 200px;
 
   p {
     padding-left: 50px;
@@ -60,6 +64,8 @@
   border-radius: 10px;
   width: 80%;
   margin-left: 50px;
+
+  box-shadow: -10px 10px 10px 0px black;
 
   background: rgb(254, 254, 254);
   background: radial-gradient(circle, rgba(254, 254, 254, 1) 0%, rgba(233, 192, 179, 1) 100%);
