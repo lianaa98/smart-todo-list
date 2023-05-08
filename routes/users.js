@@ -14,6 +14,10 @@ router.post("/login", (req, res) => {
   database.getUserWithEmail(req.body.email)
     .then((user) => {
       console.log(user);
+      const templateVars = {
+        user: user
+      }
+
       // Error checking - e-mail / password not matching
       if (!user || !(req.body.password === user.password)) {
         res.status(401).send("Invalid e-mail / password.");
@@ -21,13 +25,7 @@ router.post("/login", (req, res) => {
       }
 
       req.session.userId = user.id;
-      res.send({
-        user: {
-          name: user.name,
-          email: user.email,
-          id: user.id,
-        },
-      });
+      res.render('user_index', templateVars);
     })
 
 });
