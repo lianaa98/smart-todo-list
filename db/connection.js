@@ -126,12 +126,6 @@ const getTodoItemsByCategory = (user_id, category_name) => {
     AND category_id = (SELECT id FROM categories WHERE categories.name = $2)
     ORDER BY created_at;`, [user_id, category_name])
     .then((result) => {
-      // invalid/empty query
-      if(result.rows.length === 0) {
-        console.log('invalid/empty query', result.rows);
-        return null;
-      }
-
       // valid query
       console.log('query', result.rows);
       return result.rows;
