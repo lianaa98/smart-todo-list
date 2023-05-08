@@ -58,7 +58,6 @@ const getUserWithId = function(id) {
 };
 
 const addUser = function(user) {
-
   return db
     .query(`INSERT INTO users (name, email, password)
     VALUES ($1, $2, $3)
@@ -79,9 +78,54 @@ const addUser = function(user) {
     });
 };
 
+const addTodoItem = function(todoObj) {
+  return db
+    .query(`INSERT INTO things (content, category_id, user_id, created_at)
+    VALUES ($1, $2, $3, Now())
+    RETURNING *;`, [todoObj.content, `(SELECT id FROM categories WHERE categories.name = ${todoObj.category})`, todoObj.user_id])
+    .then((result) => {
+      // Invalid insertion
+      if (result.rows.length === 0) {
+        console.log('invalid query for insertion', result.rows);
+        return null;
+      }
+
+      // valid insertion
+      console.log('query for insertion', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
+const getAllTodoItems = (user_id) => {
+  return db
+    .query(`SELECT *
+    FROM things
+    LEFT JOIN categories ON category_id = categories.id
+    WHERE user_id = $1;`, [user_id])
+    .then((result) => {
+
+      // invalid/empty query
+      if(result.rows.length === 0) {
+        console.log('invalid/empty query', result.rows);
+        return null;
+      }
+
+      // valid query for all reservations
+      console.log('query', result.rows);
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
 
 module.exports = {
   getUserWithEmail,
   getUserWithId,
-  addUser
+  addUser,
+  addTodoItem,
+  getAllTodoItems,
 };
