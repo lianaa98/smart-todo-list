@@ -20,13 +20,22 @@ $(document).ready(function() {
     $("#register-form").slideToggle();
   })
 
-// //=======================================
-// //  Monitoring login form               ||
-// //=======================================
-//   $("#login-form").on('submit', function(event) {
-//     event.preventDefault();
+//=======================================
+//  Appending to Todo List              ||
+//=======================================
+  $("#todo-button").on('click', function(event) {
+    $("#main-todo").empty();
 
+    const list = `
+    <p>To Do List</p>
+    <div id="checklist">
+    <input id="01" type="checkbox" name="r" value="1" checked>
+    <label for="01">Bread</label>
+    <input id="02" type="checkbox" name="r" value="2">
+    <label for="02">Cheese</label>
+  </div>
 
+    `
 
-//   })
+  })
 });
