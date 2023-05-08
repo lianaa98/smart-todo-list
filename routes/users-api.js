@@ -41,11 +41,19 @@ router.post('/', async (req, res) => {
     prompt: `The category of '${plaintext}' is 'to-watch', 'to-read', 'to-eat' or 'to-buy':`,
     max_tokens: 7,
     temperature: 0,
-  });
+  })
 
-  console.log("response:", apiResponse.data.choices[0].text)
+  const formattedResp = apiResponse.data.choices[0].text.trim();
 
+  console.log(formattedResp);
 
+  const newToDoThing = {
+    content: plaintext,
+    category_name: formattedResp,
+    user_id: userId
+  }
+  
+  database.addTodoItem(newToDoThing);
 });
 
 module.exports = router;
