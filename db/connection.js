@@ -79,10 +79,23 @@ const addUser = function(user) {
 };
 
 const addTodoItem = function(todoObj) {
-  return db
-    .query(`INSERT INTO things (content, category_id, user_id, created_at)
+  return db.query(`SELECT id FROM categories WHERE categories.name = $1`, [todoObj.category_name]).then((result) => {
+    let category_name = '';
+
+    // invalid/empty query
+    if(result.rows.length === 0) {
+      console.log('invalid/empty category; setting default', result.rows);
+      category_name = 'others'
+    }
+    else {
+      // valid query
+      console.log('query', result.rows[0]);
+      category_name = todoObj.category_name;
+    }
+
+    db.query(`INSERT INTO things (content, category_id, user_id, created_at)
     VALUES ($1, (SELECT id FROM categories WHERE categories.name = $2), $3, Now())
-    RETURNING *;`, [todoObj.content, todoObj.category_name, todoObj.user_id])
+    RETURNING *;`, [todoObj.content, category_name, todoObj.user_id])
     .then((result) => {
       // Invalid insertion
       if (result.rows.length === 0) {
@@ -95,16 +108,40 @@ const addTodoItem = function(todoObj) {
       return result.rows[0];
     })
     .catch((err) => {
+      console.log('error:',err.message);
+    });  
+    return result.rows;
+  })
+  .catch((err) => {
+    console.log('error:', err.message);
+  });
+}
+
+const getTodoItemsByCategory = (user_id, category_name) => {
+  return db
+    .query(`SELECT content, categories.name AS category_name, created_at
+    FROM things
+    LEFT JOIN categories ON category_id = categories.id
+    WHERE user_id = $1
+    AND category_id = (SELECT id FROM categories WHERE categories.name = $2)
+    ORDER BY created_at;`, [user_id, category_name])
+    .then((result) => {
+      // valid query
+      console.log('query', result.rows);
+      return result.rows;
+    })
+    .catch((err) => {
       console.log(err.message);
     });
-}
+};
 
 const getAllTodoItems = (user_id) => {
   return db
     .query(`SELECT content, categories.name AS category_name, created_at
     FROM things
     LEFT JOIN categories ON category_id = categories.id
-    WHERE user_id = $1;`, [user_id])
+    WHERE user_id = $1
+    ORDER BY created_at;`, [user_id])
     .then((result) => {
 
       // invalid/empty query
@@ -113,7 +150,7 @@ const getAllTodoItems = (user_id) => {
         return null;
       }
 
-      // valid query for all reservations
+      // valid query
       console.log('query', result.rows);
       return result.rows;
     })
@@ -128,4 +165,5 @@ module.exports = {
   addUser,
   addTodoItem,
   getAllTodoItems,
+  getTodoItemsByCategory,
 };
