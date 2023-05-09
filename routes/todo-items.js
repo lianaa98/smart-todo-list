@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// READ - Get Todo items (GET)
+// READ - Get Todo item category (GET)
 router.get("/:category_name", (req, res) => {  
   const category_name = req.params.category_name;
   const userId = req.session.userId;
