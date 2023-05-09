@@ -45,14 +45,24 @@
     <p>SMART TODO</p>
     <div id="categories">
       <ul>
-        <li>To Watch</li>
-        <li>To Read</li>
-        <li>To Eat</li>
-        <li>To Buy</li>
+        <li><a href="#cat-to-watch">
+          <span>To Watch</span>
+        </a></li>
+        <li><a href="#cat-to-read">
+          <span>To Read</span>
+        </a></li>
+        <li><a href="#cat-to-eat">
+          <span>To Eat</span>
+        </a></li>
+        <li><a href="#cat-to-buy">
+          <span>To Buy</span>
+        </a></li>
       </ul>
     </div>
   </nav>
+
   <div id="content">
+    <div id="first-page">
     <p>
       Hi, <%= user.name%>
     </p>
@@ -63,8 +73,15 @@
       </div>
       <button id="todo-button" type="submit" class="btn btn-primary">To Do!</button>
     </form>
-    <div id="main-todo">
+    <div id="cat-all">
+      <div id="main-todo"></div>
     </div>
+  </div>
+    <div id="cat-to-watch"></div>
+    <div id="cat-to-read"></div>
+    <div id="cat-to-eat"></div>
+    <div id="cat-to-buy"></div>
+
   </div>
 </body>
 
