@@ -205,6 +205,19 @@ const editTodoItemCategory = function(itemId, category_name, completed_at) {
     });
 };
 
+const deleteTodoItem = function(itemId) {
+  return db.query(`
+  DELETE FROM things
+  WHERE things.id = $1;
+  `, [itemId])
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log('error:', err.message);
+    });
+};
+
 module.exports = {
   getUserWithEmail,
   getUserWithId,
