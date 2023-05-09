@@ -169,7 +169,6 @@ function loadCategory(index) {
               $(this).toggleClass("clicked");
             } else {
               $(this).toggleClass("clicked-text");
-
             }
           });
         });
