@@ -79,7 +79,7 @@ const addUser = function(user) {
 };
 
 const addTodoItem = function(todoObj) {
-  return db.query(`SELECT id FROM categories WHERE categories.name = $1`, [todoObj.category_name]).then((result) => {
+  return db.query(`SELECT id FROM categories WHERE categories.name = $1;`, [todoObj.category_name]).then((result) => {
     let category_name = '';
 
     // invalid/empty query
