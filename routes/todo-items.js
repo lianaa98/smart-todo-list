@@ -34,7 +34,7 @@ router.post("/:id", (req, res) => {
     .then((todoItems) => {
       res.send("edited database");
     });
-}
+});
 
 
 // ADD - Add Todo item (POST)
