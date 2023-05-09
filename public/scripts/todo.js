@@ -22,21 +22,6 @@ $(document).ready(function() {
   });
 
   //=======================================
-  //  Log out Route                       ||
-  //=======================================
-
-  // $("#logout").on('click', function() {
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "/users/logout",
-  //   })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-
-  // });
-
-  //=======================================
   //  Appending to Todo List              ||
   //=======================================
   $("#new-todo-form").on('submit', function(event) {
@@ -63,9 +48,33 @@ $(document).ready(function() {
 
 //------ All Todo Page ------
 function createToDoElement(todoObj) {
+  const todoId = todoObj.id;
+
+  const formRoute = `/todo-items/${todoId}`;
+  const formRouteDel = `/todo-items/${todoId}/delete`;
+
+  const thingId = "t-" + todoId;
+  const catId = "c-" + todoId;
   const content = todoObj.content;
   const category = todoObj.category_name;
+  let displayCat;
+
+  if (category === "to-watch") {
+    displayCat = "To Watch";
+  }
+  if (category === "to-read") {
+    displayCat = "To Read";
+  }
+  if (category === "to-eat") {
+    displayCat = "To Eat";
+  }
+  if (category === "to-buy") {
+    displayCat = "To Buy";
+  }
+
   const created_at = todoObj.created_at;
+
+  console.log(thingId, catId);
 
   function escape(str) {
     let div = document.createElement("div");
@@ -75,13 +84,26 @@ function createToDoElement(todoObj) {
 
   const markup = `
   <div class="todo-obj">
-  <div class="thing">
-  <img class="icon">
-  <span class="statement">${escape(content)}</span>
-  </div>
-  <div class="category">
-  <span>${category}</span>  
-  </div>
+
+    <div class="thing" id=${thingId}>
+      <img class="icon">
+      <span class="statement">${escape(content)}</span>
+    </div>
+
+    <form class="catform" id=${catId} method="POST" action=${formRoute}>
+    <button type="submit" class="category">${displayCat}</button>
+    <select class="select-cat" name="category_name">
+      <option value="to-watch">To Watch</option>
+      <option value="to-read">To Read</option>
+      <option value="to-eat">To Eat</option>
+      <option value="to-buy">To Buy</option>
+    </select>
+    </form>
+
+    <form class="deleteform" method="POST" action=${formRouteDel}>
+      <button class="deleteButton">DELETE</button>
+    </form>
+
   </div>
   `;
   return markup;
@@ -98,12 +120,14 @@ function renderTodo(todoArray) {
 }
 
 function loadTodo() {
-  console.log("loading todo list...");
 
   $.ajax("/todo-items/", { method: "GET" })
     .then(function(todos) {
 
       renderTodo(todos);
+      console.log(todos);
+
+      // Bee icons----
 
       $(".todo-obj").children().each(function() {
         if ($(this).hasClass("thing")) {
@@ -119,6 +143,20 @@ function loadTodo() {
           });
         }
       });
+
+      // Edit button ----
+
+      $(".todo-obj").children().each(function() {
+        // monitor form button
+        if ($(this).hasClass("catform")) {
+          $(this).on('submit', function(event) {
+            if($(".select-cat").is(":hidden")) {
+              event.preventDefault();
+              $(".select-cat").slideDown();
+            }
+          })
+        }
+      })
     })
     .catch(err => {
       console.log(err);
@@ -128,10 +166,40 @@ function loadTodo() {
 
 //------ Category pages ------
 
+function createCatElement(todoObj) {
+  const todoId = todoObj.id;
+
+  const thingId = "t-" + todoId;
+  const catId = "c-" + todoId;
+  const content = todoObj.content;
+  const category = todoObj.category_name;
+
+  const created_at = todoObj.created_at;
+
+  console.log(thingId, catId);
+
+  function escape(str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  const markup = `
+  <div class="todo-obj">
+
+    <div class="thing" id=${thingId}>
+      <img class="icon">
+      <span class="statement">${escape(content)}</span>
+    </div>
+
+  </div>
+  `;
+  return markup;
+}
+
 function renderCatTodo(todoArray, i) {
 
   $(`#todo-${i}`).empty();
-  console.log("rendering works!");
 
   if (todoArray.length === 0) {
     $(`#todo-${i}`).append(`
@@ -141,7 +209,7 @@ function renderCatTodo(todoArray, i) {
   }
 
   for (const todo of todoArray) {
-    const $todo = createToDoElement(todo);
+    const $todo = createCatElement(todo);
     $(`#todo-${i}`).append($todo);
   }
 }
@@ -164,21 +232,14 @@ function loadCategory(index) {
     cat = "to-buy";
   }
 
-  console.log("cat:", cat);
-
-  console.log("loading category...");
-
   $.ajax(`/todo-items/${cat}`, { method: "GET" })
     .then(function(todos) {
-
-      console.log("todos:", todos);
 
       renderCatTodo(todos, index);
 
       $(".todo-obj").children().each(function() {
         if ($(this).hasClass("thing")) {
           $(this).on('click', function() {
-            console.log("clicked!!!");
             $(this).children().each(function() {
               if ($(this).hasClass("icon")) {
                 $(this).toggleClass("clicked");

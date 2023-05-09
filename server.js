@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
   // When user is logged out
   if (!userId) {
     console.log('Logged out');
-    res.status(200);
+    res.redirect("/login");
     return;
   }
   // When user is logged in (has cookie)

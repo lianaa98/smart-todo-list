@@ -224,12 +224,38 @@
   font-family: 'Darumadrop One', cursive;
 }
 
-.category {
+
+.category, .deleteButton {
   display: flex;
   width: 100px;
   font-family: 'Darumadrop One', cursive;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+  background-color: #85FFBD;
+  background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+
+  font-family: 'Darumadrop One', cursive;
+  height: 48px;
+  touch-action: manipulation;
+
 }
+
+.category:active {
+  transform: scale(0.9, 0.9);
+  outline: 0;
+}
+
+.category:hover {
+  outline: 0;
+  box-shadow: -3px 5px 1px 2px #ffd23d;
+}
+
 
 #cat-0 {
   min-height: 100vh;
@@ -248,4 +274,8 @@
   min-height: 100vh;
   background: rgb(195, 124, 34);
   background: linear-gradient(288deg, rgba(195, 124, 34, 1) 0%, rgba(253, 187, 45, 1) 100%);
+}
+
+.select-cat {
+  display: none;
 }
