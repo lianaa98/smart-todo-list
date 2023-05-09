@@ -163,7 +163,7 @@ const getAllTodoItems = (user_id) => {
 const editTodoItemCategory = function(itemId, category_name) {
   return db.query(`
   UPDATE things
-  SET category = $1
+  SET category_id = (SELECT id FROM categories WHERE categories.name = $1)
   WHERE things.id = $2;
   `, [category_name, itemId]).then((result) => {
     // let category_name = '';
