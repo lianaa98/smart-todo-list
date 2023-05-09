@@ -53,6 +53,28 @@ router.post("/:id", (req, res) => {
   }
 });
 
+// ADD - Add Todo item (POST)
+// router.post("/", (req, res) => {
+//   const todoItem = req.body;
+//   todoItem.user_id = req.session.userId;
+//   /* todoItem is an object like this: 
+//   {
+//     content,
+//     category_name
+//   } */
+//   console.log('todoItem:', todoItem);
+//   database
+//     .addTodoItem(todoItem)
+//     .then((todoItem) => {
+//       if (!todoItem) {
+//         return res.send({ error: "error" });
+//       }
+
+//       //
+//       res.send('Added!');
+//     })
+//     .catch((e) => res.send(e));
+// });
 
 // DELETE - delete todo item by ID (POST)
 router.post("/:id/delete", (req, res) => {
