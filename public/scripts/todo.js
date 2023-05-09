@@ -51,6 +51,7 @@ function createToDoElement(todoObj) {
   const todoId = todoObj.id;
 
   const formRoute = `/todo-items/${todoId}`;
+  const formRouteDel = `/todo-items/${todoId}/delete`;
 
   const thingId = "t-" + todoId;
   const catId = "c-" + todoId;
@@ -84,7 +85,7 @@ function createToDoElement(todoObj) {
     </select>
     </form>
 
-    <form>
+    <form class="deleteform" method="POST" action=${formRouteDel}>
       <button>Delete</button>
     </form>
 

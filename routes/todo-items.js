@@ -95,7 +95,7 @@ router.post("/:id/delete", (req, res) => {
   */
   database.deleteTodoItem(itemId, userId)
   .then(() => {
-    res.send("delete item from database?");
+    res.redirect("/users/me");
   });
 });
 
