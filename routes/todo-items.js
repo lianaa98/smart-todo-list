@@ -27,6 +27,7 @@ router.get("/:category_name", (req, res) => {
 // EDIT - edit todo item by ID (POST)
 router.post("/:id", (req, res) => {
   const itemId = req.params.id;
+  const userId = req.session.userId;
   const category_name = req.body.category_name;
   const completed = req.body.completed;
   /* req.body is an object like this: 
@@ -40,18 +41,17 @@ router.post("/:id", (req, res) => {
   where this edit route can do one or the other exclusively.
   */
   if (completed === undefined) { // only edit category, and don't toggle completed
-    database.editTodoItemCategory(itemId, category_name)
+    database.editTodoItemCategory(itemId, category_name, userId)
     .then(() => {
-      res.send("edited database category");
+      res.send("edited database category?");
     });
   } else { // only toggle completed
-    database.editTodoItemCompleted(itemId, (completed==="true"))
+    database.editTodoItemCompleted(itemId, (completed==="true"), userId)
     .then(() => {
-      res.send("edited database completed");
+      res.send("edited database completed?");
     });
   }
 });
-
 
 // ADD - Add Todo item (POST)
 // router.post("/", (req, res) => {
@@ -75,5 +75,25 @@ router.post("/:id", (req, res) => {
 //     })
 //     .catch((e) => res.send(e));
 // });
+
+// DELETE - delete todo item by ID (POST)
+router.post("/:id/delete", (req, res) => {
+  const itemId = req.params.id;
+  const userId = req.session.userId;
+  /* req.body is an object like this: 
+  {
+    category_name
+  }
+  or an object like this: 
+  {
+    completed
+  } 
+  where this edit route can do one or the other exclusively.
+  */
+  database.deleteTodoItem(itemId, userId)
+  .then(() => {
+    res.send("delete item from database?");
+  });
+});
 
 module.exports = router;
