@@ -20,6 +20,7 @@ router.get("/:category_name", (req, res) => {
   const userId = req.session.userId;
   database.getTodoItemsByCategory(userId, category_name)
     .then((todoItems) => {
+      console.log("todoItems:", todoItems);
       res.json(todoItems);
     });
 });

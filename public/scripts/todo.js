@@ -2,6 +2,10 @@
 $(document).ready(function() {
   console.log("document is ready!");
   loadTodo();
+  loadCategory(0);
+  loadCategory(1);
+  loadCategory(2);
+  loadCategory(3);
 
   //=======================================
   //  Navbar Animation                    ||
@@ -41,6 +45,8 @@ $(document).ready(function() {
 //=======================================
 //  Helper Functions for rendering      ||
 //=======================================
+
+//------ All Todo Page ------
 function createToDoElement(todoObj) {
   const content = todoObj.content;
   const category = todoObj.category_name;
@@ -103,3 +109,72 @@ function loadTodo() {
       console.log(err);
     })
 };
+
+
+//------ Category pages ------
+
+function renderCatTodo(todoArray, i) {
+
+  $(`#todo-${i}`).empty();
+  $(`#todo-${i}`).css('background', 'black');
+  console.log("rendering works!");
+
+  if (todoArray.length === 0) {
+    $(`#todo-${i}`).append("EMPTY!");
+  }
+
+  for (const todo of todoArray) {
+    const $todo = createToDoElement(todo);
+    $(`#todo-${i}`).append($todo);
+  }
+}
+
+function loadCategory(index) {
+
+  let cat;
+  console.log(index);
+
+  if (index === 0) {
+    cat = "to-watch";
+  }
+  if (index === 1) {
+    cat = "to-read";
+  }
+  if (index === 2) {
+    cat = "to-eat";
+  }
+  if (index === 3) {
+    cat = "to-buy";
+  }
+
+  console.log("cat:", cat);
+
+  console.log("loading category...");
+
+  $.ajax(`/todo-items/${cat}`, { method: "GET" })
+  .then(function(todos) {
+
+    console.log("todos:", todos);
+
+    renderCatTodo(todos, index);
+
+    $(".todo-obj").children().each(function() {
+      if ($(this).hasClass("thing")) {
+        $(this).on('click', function() {
+          $(this).children().each(function() {
+            if ($(this).hasClass("icon")) {
+              $(this).toggleClass("clicked");
+            } else {
+              $(this).toggleClass("clicked-text");
+
+            }
+          });
+        });
+      }
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  })
+ 
+}
