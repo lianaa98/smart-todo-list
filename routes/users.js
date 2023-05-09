@@ -9,6 +9,12 @@ const express = require('express');
 const router = express.Router();
 const database = require('../db/connection');
 
+router.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("/login");
+  return;
+})
+
 // LOGIN (POST) -> redirects to /users/me
 router.post("/login", (req, res) => {
   database.getUserWithEmail(req.body.email)
