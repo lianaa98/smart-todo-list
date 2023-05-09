@@ -7,8 +7,6 @@ $(document).ready(function() {
   //=======================================
   $("#new-todo-form").on('submit', function(event) {
     event.preventDefault();
-    // console.log("HELLLOOOOO HEREEE")
-    console.log($(this).serialize());
 
     $.ajax({
       type: "POST",
@@ -16,7 +14,6 @@ $(document).ready(function() {
       data: $(this).serialize(),
     })
       .then(function() {
-        console.log("Check me here!");
         loadTodo();
         $("#new-todo").val("");
       })
@@ -58,9 +55,6 @@ function renderTodo(todoArray) {
 
   $("#main-todo").empty();
 
-  console.log("rendering...");
-  console.log(todoArray);
-
   for (const todo of todoArray) {
     const $todo = createToDoElement(todo);
     $("#main-todo").append($todo);
@@ -72,6 +66,7 @@ function loadTodo() {
 
   $.ajax("/todo-items/", { method: "GET" })
     .then(function(todos) {
+
       renderTodo(todos);
 
       $(".todo-obj").children().each(function() {
@@ -88,5 +83,8 @@ function loadTodo() {
           });
         }
       });
-    });
+    })
+    .catch(err => {
+      console.log(err);
+    })
 };
