@@ -186,18 +186,6 @@ const editTodoItemCategory = function(itemId, category_name, completed_at) {
   WHERE things.id = $2;
   `, [category_name, itemId])
     .then((result) => {
-      // let category_name = '';
-
-      // // invalid/empty query
-      // if(result.rows.length === 0) {
-      //   console.log('invalid/empty category; setting default', result.rows);
-      //   category_name = 'others'
-      // }
-      // else {
-      //   // valid query
-      //   console.log('query', result.rows[0]);
-      //   category_name = todoObj.category_name;
-      // } 
       return result;
     })
     .catch((err) => {
