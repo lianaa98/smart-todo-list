@@ -78,6 +78,96 @@ const addUser = function(user) {
     });
 };
 
+const setUserName = function(name, userId) {
+  return db
+    .query(`UPDATE users
+    SET name = $1
+    WHERE users.id = $2
+    RETURNING *;`, [name, userId])
+    .then((result) => {
+      // Invalid insertion
+      if (result.rows.length === 0) {
+        console.log('invalid query for setting name', result.rows);
+        return null;
+      }
+
+      // valid insertion
+      console.log('query for setting name', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+const getUserName = function(userId) {
+  return db
+    .query(`
+    SELECT name 
+    FROM users
+    WHERE id = $1;`, [userId])
+    .then((result) => {
+      // Invalid insertion
+      if (result.rows.length === 0) {
+        console.log('invalid query for setting name', result.rows);
+        return null;
+      }
+
+      // valid insertion
+      console.log('query for setting name', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+// const getUserImgProfilePic = function(userId) {
+//   return db
+//     .query(`
+//     SELECT name 
+//     FROM users
+//     WHERE id = $1;`, [userId])
+//     .then((result) => {
+//       // Invalid insertion
+//       if (result.rows.length === 0) {
+//         console.log('invalid query for setting name', result.rows);
+//         return null;
+//       }
+
+//       // valid insertion
+//       console.log('query for setting name', result.rows[0]);
+//       return result.rows[0];
+//     })
+//     .catch((err) => {
+//       console.log(err.message);
+//     });
+// };
+
+const setUserProfileImgId = function(profile_img_id, userId) {
+  return db
+    .query(`UPDATE users
+    SET name = $1
+    WHERE users.id = $2
+    RETURNING *;`, [name, userId])
+    .then((result) => {
+      // Invalid insertion
+      if (result.rows.length === 0) {
+        console.log('invalid query for setting name', result.rows);
+        return null;
+      }
+
+      // valid insertion
+      console.log('query for setting name', result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
 const addTodoItem = function(todoObj) {
   return db.query(`SELECT id FROM categories WHERE categories.name = $1;`, [todoObj.category_name]).then((result) => {
     let category_name = '';
@@ -213,6 +303,9 @@ module.exports = {
   getUserWithEmail,
   getUserWithId,
   addUser,
+  setUserName,
+  getUserName,
+  setUserProfileImgId,
   addTodoItem,
   getAllTodoItems,
   getTodoItemsByCategory,
