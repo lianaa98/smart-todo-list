@@ -116,11 +116,13 @@ function loadTodo() {
 function renderCatTodo(todoArray, i) {
 
   $(`#todo-${i}`).empty();
-  $(`#todo-${i}`).css('background', 'black');
   console.log("rendering works!");
 
   if (todoArray.length === 0) {
-    $(`#todo-${i}`).append("EMPTY!");
+    $(`#todo-${i}`).append(`
+    <br><br>
+    <span class="statement" style="padding-left: 30px; font-size: 1.30em">You're all caught up!</span>
+    <br><br>`);
   }
 
   for (const todo of todoArray) {
@@ -161,6 +163,7 @@ function loadCategory(index) {
     $(".todo-obj").children().each(function() {
       if ($(this).hasClass("thing")) {
         $(this).on('click', function() {
+          console.log("clicked!!!");
           $(this).children().each(function() {
             if ($(this).hasClass("icon")) {
               $(this).toggleClass("clicked");
