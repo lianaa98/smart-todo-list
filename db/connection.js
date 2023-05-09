@@ -159,7 +159,7 @@ const getAllTodoItems = (user_id) => {
     });
 };
 
-const editTodoItemCompleted = function(itemId, completed) {
+const editTodoItemCompleted = function(itemId, completed, userId) {
   let completedParam = '';
   if (completed) {
     completedParam = 'Now()';
@@ -169,8 +169,9 @@ const editTodoItemCompleted = function(itemId, completed) {
   return db.query(`
   UPDATE things
   SET completed_at = ${completedParam}
-  WHERE things.id = $1;
-  `, [itemId]) // no sql injection expected from this due to value of completedParam being set by the backend code, not user input
+  WHERE things.id = $1
+  AND user_id = $2;
+  `, [itemId, userId]) // no sql injection expected from this due to value of completedParam being set by the backend code, not user input
     .then((result) => {
       return result;
     })
@@ -179,12 +180,13 @@ const editTodoItemCompleted = function(itemId, completed) {
     });
 };
 
-const editTodoItemCategory = function(itemId, category_name, completed_at) {
+const editTodoItemCategory = function(itemId, category_name, completed_at, userId) {
   return db.query(`
   UPDATE things
   SET category_id = (SELECT id FROM categories WHERE categories.name = $1)
-  WHERE things.id = $2;
-  `, [category_name, itemId])
+  WHERE things.id = $2
+  AND user_id = $3;
+  `, [category_name, itemId, userId])
     .then((result) => {
       return result;
     })
@@ -193,11 +195,12 @@ const editTodoItemCategory = function(itemId, category_name, completed_at) {
     });
 };
 
-const deleteTodoItem = function(itemId) {
+const deleteTodoItem = function(itemId, userId) {
   return db.query(`
   DELETE FROM things
-  WHERE things.id = $1;
-  `, [itemId])
+  WHERE things.id = $1
+  AND user_id = 2;
+  `, [itemId, userId])
     .then((result) => {
       return result;
     })
@@ -215,4 +218,5 @@ module.exports = {
   getTodoItemsByCategory,
   editTodoItemCategory,
   editTodoItemCompleted,
+  deleteTodoItem,
 };
