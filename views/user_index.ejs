@@ -42,7 +42,6 @@
 
 <body id="userIndexBody">
   <nav>
-    <!-- <img src="../icons/honeycomb.png"> -->
     <a href="#content"><p>SMART TODO</p></a>
     <div id="categories">
       <ul>
@@ -60,9 +59,9 @@
         </a></li>
       </ul>
     </div>
-    <div id="logout" class="button-2">
-      <span>Log Out</span>
-    </div>
+    <form method="POST" action="/users/logout">
+      <button type="submit" id="logout" class="button-2">Log out</button>
+    </form>
   </nav>
 
   <div id="content">
