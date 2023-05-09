@@ -180,7 +180,7 @@ const editTodoItemCompleted = function(itemId, completed, userId) {
     });
 };
 
-const editTodoItemCategory = function(itemId, category_name, completed_at, userId) {
+const editTodoItemCategory = function(itemId, category_name, userId) {
   return db.query(`
   UPDATE things
   SET category_id = (SELECT id FROM categories WHERE categories.name = $1)
@@ -199,7 +199,7 @@ const deleteTodoItem = function(itemId, userId) {
   return db.query(`
   DELETE FROM things
   WHERE things.id = $1
-  AND user_id = 2;
+  AND user_id = $2;
   `, [itemId, userId])
     .then((result) => {
       return result;

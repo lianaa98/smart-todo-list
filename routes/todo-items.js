@@ -43,12 +43,12 @@ router.post("/:id", (req, res) => {
   if (completed === undefined) { // only edit category, and don't toggle completed
     database.editTodoItemCategory(itemId, category_name, userId)
     .then(() => {
-      res.send("edited database category");
+      res.send("edited database category?");
     });
   } else { // only toggle completed
     database.editTodoItemCompleted(itemId, (completed==="true"), userId)
     .then(() => {
-      res.send("edited database completed");
+      res.send("edited database completed?");
     });
   }
 });
@@ -92,7 +92,7 @@ router.post("/:id/delete", (req, res) => {
   */
   database.deleteTodoItem(itemId, userId)
   .then(() => {
-    res.send("delete item from database");
+    res.send("delete item from database?");
   });
 });
 
