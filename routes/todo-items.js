@@ -22,6 +22,21 @@ router.get("/:category_name", (req, res) => {
     });
 });
 
+// EDIT - edit todo item by ID (POST)
+router.post("/:id", (req, res) => {
+  const itemId = req.params.id;
+  const category_name = req.body.category_name;
+  /* req.body is an object like this: 
+  {
+    category_name
+  } */
+  database.editTodoItemCategory(itemId, category_name)
+    .then((todoItems) => {
+      res.send("edited database");
+    });
+}
+
+
 // ADD - Add Todo item (POST)
 router.post("/", (req, res) => {
   const todoItem = req.body;

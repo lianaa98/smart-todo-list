@@ -119,7 +119,7 @@ const addTodoItem = function(todoObj) {
 
 const getTodoItemsByCategory = (user_id, category_name) => {
   return db
-    .query(`SELECT id, content, categories.name AS category_name, created_at
+    .query(`SELECT things.id, content, categories.name AS category_name, created_at
     FROM things
     LEFT JOIN categories ON category_id = categories.id
     WHERE user_id = $1
@@ -137,7 +137,7 @@ const getTodoItemsByCategory = (user_id, category_name) => {
 
 const getAllTodoItems = (user_id) => {
   return db
-    .query(`SELECT id, content, categories.name AS category_name, created_at
+    .query(`SELECT things.id, content, categories.name AS category_name, created_at
     FROM things
     LEFT JOIN categories ON category_id = categories.id
     WHERE user_id = $1
@@ -159,6 +159,32 @@ const getAllTodoItems = (user_id) => {
     });
 };
 
+
+const editTodoItemCategory = function(itemId, category_name) {
+  return db.query(`
+  UPDATE things
+  SET category = $1
+  WHERE things.id = $2;
+  `, [category_name, itemId]).then((result) => {
+    // let category_name = '';
+
+    // // invalid/empty query
+    // if(result.rows.length === 0) {
+    //   console.log('invalid/empty category; setting default', result.rows);
+    //   category_name = 'others'
+    // }
+    // else {
+    //   // valid query
+    //   console.log('query', result.rows[0]);
+    //   category_name = todoObj.category_name;
+    // } 
+    return result;
+  })
+  .catch((err) => {
+    console.log('error:', err.message);
+  });
+}
+
 module.exports = {
   getUserWithEmail,
   getUserWithId,
@@ -166,4 +192,5 @@ module.exports = {
   addTodoItem,
   getAllTodoItems,
   getTodoItemsByCategory,
+  editTodoItemCategory,
 };
