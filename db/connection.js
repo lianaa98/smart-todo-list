@@ -168,9 +168,9 @@ const editTodoItemCompleted = function(itemId, completed) {
   }
   return db.query(`
   UPDATE things
-  SET completed_at = $1
-  WHERE things.id = $2;
-  `, [completedParam, itemId])
+  SET completed_at = ${completedParam}
+  WHERE things.id = $1;
+  `, [itemId]) // no sql injection expected from this due to value of completedParam being set by the backend code, not user input
     .then((result) => {
       return result;
     })
