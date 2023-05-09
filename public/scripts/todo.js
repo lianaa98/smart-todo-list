@@ -2,6 +2,21 @@
 $(document).ready(function() {
   console.log("document is ready!");
   loadTodo();
+
+  //=======================================
+  //  Navbar Animation                    ||
+  //=======================================
+
+  $("a").each(function() {
+    $(this).on('click', function(e) {
+      e.preventDefault();
+      const id = $(this).attr("href");
+      $(id)[0].scrollIntoView({
+        behavior: "smooth"
+      });
+    })
+  })
+  
   //=======================================
   //  Appending to Todo List              ||
   //=======================================
