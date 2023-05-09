@@ -33,7 +33,7 @@ router.post("/:id", (req, res) => {
     category_name
   } */
   database.editTodoItemCategory(itemId, category_name)
-    .then((todoItems) => {
+    .then(() => {
       res.send("edited database");
     });
 });
