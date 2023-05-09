@@ -31,6 +31,8 @@ router.post("/:id", (req, res) => {
   const userId = req.session.userId;
   const category_name = req.body.category_name;
   const completed = req.body.completed;
+
+  console.log("Edit request:", req.body);
   /* req.body is an object like this: 
   {
     category_name
@@ -44,7 +46,7 @@ router.post("/:id", (req, res) => {
   if (completed === undefined) { // only edit category, and don't toggle completed
     database.editTodoItemCategory(itemId, category_name, userId)
     .then(() => {
-      res.send("edited database category?");
+      res.redirect("/users/me");
     });
   } else { // only toggle completed
     database.editTodoItemCompleted(itemId, (completed==="true"), userId)
