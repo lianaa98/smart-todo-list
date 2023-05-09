@@ -83,9 +83,9 @@ const addTodoItem = function(todoObj) {
     let category_name = '';
 
     // invalid/empty query
-    if(result.rows.length === 0) {
+    if (result.rows.length === 0) {
       console.log('invalid/empty category; setting default', result.rows);
-      category_name = 'others'
+      category_name = 'others';
     }
     else {
       // valid query
@@ -96,26 +96,26 @@ const addTodoItem = function(todoObj) {
     db.query(`INSERT INTO things (content, category_id, user_id, created_at)
     VALUES ($1, (SELECT id FROM categories WHERE categories.name = $2), $3, Now())
     RETURNING *;`, [todoObj.content, category_name, todoObj.user_id])
-    .then((result) => {
-      // Invalid insertion
-      if (result.rows.length === 0) {
-        console.log('invalid query for insertion', result.rows);
-        return null;
-      }
+      .then((result) => {
+        // Invalid insertion
+        if (result.rows.length === 0) {
+          console.log('invalid query for insertion', result.rows);
+          return null;
+        }
 
-      // valid insertion
-      console.log('query for insertion', result.rows[0]);
-      return result.rows[0];
-    })
-    .catch((err) => {
-      console.log('error:',err.message);
-    });  
+        // valid insertion
+        console.log('query for insertion', result.rows[0]);
+        return result.rows[0];
+      })
+      .catch((err) => {
+        console.log('error:', err.message);
+      });
     return result.rows;
   })
-  .catch((err) => {
-    console.log('error:', err.message);
-  });
-}
+    .catch((err) => {
+      console.log('error:', err.message);
+    });
+};
 
 const getTodoItemsByCategory = (user_id, category_name) => {
   return db
@@ -145,7 +145,7 @@ const getAllTodoItems = (user_id) => {
     .then((result) => {
 
       // invalid/empty query
-      if(result.rows.length === 0) {
+      if (result.rows.length === 0) {
         console.log('invalid/empty query', result.rows);
         return null;
       }
@@ -159,31 +159,51 @@ const getAllTodoItems = (user_id) => {
     });
 };
 
+const editTodoItemCompleted = function(itemId, completed) {
+  let completedParam = '';
+  if (completed) {
+    completedParam = 'Now()';
+  } else {
+    completedParam = 'null';
+  }
+  return db.query(`
+  UPDATE things
+  SET completed_at = ${completedParam}
+  WHERE things.id = $1;
+  `, [itemId]) // no sql injection expected from this due to value of completedParam being set by the backend code, not user input
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log('error:', err.message);
+    });
+};
 
-const editTodoItemCategory = function(itemId, category_name) {
+const editTodoItemCategory = function(itemId, category_name, completed_at) {
   return db.query(`
   UPDATE things
   SET category_id = (SELECT id FROM categories WHERE categories.name = $1)
   WHERE things.id = $2;
-  `, [category_name, itemId]).then((result) => {
-    // let category_name = '';
+  `, [category_name, itemId])
+    .then((result) => {
+      // let category_name = '';
 
-    // // invalid/empty query
-    // if(result.rows.length === 0) {
-    //   console.log('invalid/empty category; setting default', result.rows);
-    //   category_name = 'others'
-    // }
-    // else {
-    //   // valid query
-    //   console.log('query', result.rows[0]);
-    //   category_name = todoObj.category_name;
-    // } 
-    return result;
-  })
-  .catch((err) => {
-    console.log('error:', err.message);
-  });
-}
+      // // invalid/empty query
+      // if(result.rows.length === 0) {
+      //   console.log('invalid/empty category; setting default', result.rows);
+      //   category_name = 'others'
+      // }
+      // else {
+      //   // valid query
+      //   console.log('query', result.rows[0]);
+      //   category_name = todoObj.category_name;
+      // } 
+      return result;
+    })
+    .catch((err) => {
+      console.log('error:', err.message);
+    });
+};
 
 module.exports = {
   getUserWithEmail,
@@ -193,4 +213,5 @@ module.exports = {
   getAllTodoItems,
   getTodoItemsByCategory,
   editTodoItemCategory,
+  editTodoItemCompleted,
 };
