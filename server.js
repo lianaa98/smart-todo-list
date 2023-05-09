@@ -58,32 +58,32 @@ app.use('/todo-items', todoItemsRoutes);
 app.get('/', (req, res) => {
   const userId = req.session.userId;
   const templateVars = {};
-  templateVars.showIndex = `<script defer src="/scripts/index_loggedin.js"></script>`;
 
+  console.log(userId);
   // When user is logged out
   if (!userId) {
-    // Direct to the login page
     console.log('Logged out');
-    templateVars.showIndex = `<script defer src="/scripts/index_loggedout.js"></script>`;
-    res.render('index', templateVars);
+    res.status(200);
     return;
   }
-
   // When user is logged in (has cookie)
   database
     .getUserWithId(userId)
     .then((user) => {
       if (!user) {
-        return res.send({ error: "no user with that id" });
+        return res.status(400).send({ error: "no user with that id" });
       }
-
       templateVars.username = user.name;
-
-      res.render('index', templateVars);
+      res.redirect("/users/me");
     })
     .catch((e) => res.send(e));
   
 });
+
+
+app.get('/login', (req, res) => {
+  res.render("index");
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

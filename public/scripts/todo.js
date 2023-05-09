@@ -18,9 +18,24 @@ $(document).ready(function() {
       $(id)[0].scrollIntoView({
         behavior: "smooth"
       });
-    })
-  })
-  
+    });
+  });
+
+  //=======================================
+  //  Log out Route                       ||
+  //=======================================
+
+  // $("#logout").on('click', function() {
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "/users/logout",
+  //   })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+
+  // });
+
   //=======================================
   //  Appending to Todo List              ||
   //=======================================
@@ -107,7 +122,7 @@ function loadTodo() {
     })
     .catch(err => {
       console.log(err);
-    })
+    });
 };
 
 
@@ -154,29 +169,29 @@ function loadCategory(index) {
   console.log("loading category...");
 
   $.ajax(`/todo-items/${cat}`, { method: "GET" })
-  .then(function(todos) {
+    .then(function(todos) {
 
-    console.log("todos:", todos);
+      console.log("todos:", todos);
 
-    renderCatTodo(todos, index);
+      renderCatTodo(todos, index);
 
-    $(".todo-obj").children().each(function() {
-      if ($(this).hasClass("thing")) {
-        $(this).on('click', function() {
-          console.log("clicked!!!");
-          $(this).children().each(function() {
-            if ($(this).hasClass("icon")) {
-              $(this).toggleClass("clicked");
-            } else {
-              $(this).toggleClass("clicked-text");
-            }
+      $(".todo-obj").children().each(function() {
+        if ($(this).hasClass("thing")) {
+          $(this).on('click', function() {
+            console.log("clicked!!!");
+            $(this).children().each(function() {
+              if ($(this).hasClass("icon")) {
+                $(this).toggleClass("clicked");
+              } else {
+                $(this).toggleClass("clicked-text");
+              }
+            });
           });
-        });
-      }
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
-  })
-  .catch(err => {
-    console.log(err);
-  })
- 
+
 }
