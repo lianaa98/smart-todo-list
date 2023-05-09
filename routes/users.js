@@ -88,7 +88,7 @@ router.post("/profile", (req, res) => {
     });
 });
 
-
+// READ (profile)
 router.get("/profile", (req, res) => {
   const userId = req.session.userId;
   // edge case: user not logged in, but URL is found
@@ -104,7 +104,7 @@ router.get("/profile", (req, res) => {
         res.status(403).send("Invalid user id.");
         return;
       }
-      res.json(user.name);
+      res.json(user);
     });
 });
 
