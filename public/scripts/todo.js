@@ -1,7 +1,7 @@
 // Client facing scripts here
 $(document).ready(function() {
   console.log("document is ready!");
-
+  loadTodo();
   //=======================================
   //  Appending to Todo List              ||
   //=======================================
@@ -15,14 +15,14 @@ $(document).ready(function() {
       url: "/api/users",
       data: $(this).serialize(),
     })
-    .then(function() {
-      console.log("Check me here!");
-      loadTodo();
-      $("#new-todo").val("");
-    })
-    .catch(err => {
-      console.log(err);
-    });
+      .then(function() {
+        console.log("Check me here!");
+        loadTodo();
+        $("#new-todo").val("");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 });
 
@@ -41,16 +41,15 @@ function createToDoElement(todoObj) {
   }
 
   const markup = `
-  <input id="02" type="checkbox" name="r" value="2">
-  <label for="02">${escape(content)}</label>
-  <div class="custom-select" style="width:200px;">
-  <select>
-    <option value="1">To Watch</option>
-    <option value="2">To Read</option>
-    <option value="3">To Eat</option>
-    <option value="4">To Buy</option>
-  </select>
-</div>
+  <div class="todo-obj">
+  <div class="thing">
+  <img class="icon">
+  <span class="statement">${escape(content)}</span>
+  </div>
+  <div class="category">
+  <span>${category}</span>  
+  </div>
+  </div>
   `;
   return markup;
 }
@@ -74,5 +73,20 @@ function loadTodo() {
   $.ajax("/todo-items/", { method: "GET" })
     .then(function(todos) {
       renderTodo(todos);
+
+      $(".todo-obj").children().each(function() {
+        if ($(this).hasClass("thing")) {
+          $(this).on('click', function() {
+            $(this).children().each(function() {
+              if ($(this).hasClass("icon")) {
+                $(this).toggleClass("clicked");
+              } else {
+                $(this).toggleClass("clicked-text");
+
+              }
+            });
+          });
+        }
+      });
     });
-}
+};
