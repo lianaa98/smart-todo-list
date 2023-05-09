@@ -1,7 +1,5 @@
 // Client facing scripts here
 $(document).ready(function() {
-  console.log("document is ready!");
-
 //=======================================
 //  User Login/Register Forms Animation ||
 //=======================================
@@ -19,14 +17,4 @@ $(document).ready(function() {
     }
     $("#register-form").slideToggle();
   })
-
-// //=======================================
-// //  Monitoring login form               ||
-// //=======================================
-//   $("#login-form").on('submit', function(event) {
-//     event.preventDefault();
-
-
-
-//   })
 });
