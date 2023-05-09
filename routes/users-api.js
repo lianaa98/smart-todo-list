@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
     temperature: 0,
   })
 
-  const formattedResp = apiResponse.data.choices[0].text.trim();
+  const formattedResp = apiResponse.data.choices[0].text.trim().toLowerCase();
 
   console.log(formattedResp);
 
@@ -53,7 +53,9 @@ router.post('/', async (req, res) => {
     user_id: userId
   }
   
+  res.status(200);
   database.addTodoItem(newToDoThing);
+  res.send();
 });
 
 module.exports = router;

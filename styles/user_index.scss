@@ -33,6 +33,7 @@
           list-style: none;
           cursor: pointer;
         }
+
         li:hover {
           color: white;
         }
@@ -46,6 +47,7 @@
   flex-direction: column;
   width: 80%;
   margin-left: 50px;
+
   input {
     font-family: 'Darumadrop One', cursive;
     border: none;
@@ -55,6 +57,7 @@
     border-bottom-style: solid;
     background-color: transparent;
   }
+
   button {
     align-self: flex-end;
     width: 80px;
@@ -105,14 +108,66 @@
 
 #main-todo {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   border-radius: 10px;
-  width: 80%;
-  margin-top: 50px;
-  margin-left: 50px;
+  width: 90%;
+  margin: 50px 50px 50px 50px;
+
 
   box-shadow: -10px 10px 10px 0px black;
 
   background: rgb(254, 254, 254);
   background: radial-gradient(circle, rgba(254, 254, 254, 1) 0%, rgba(233, 192, 179, 1) 100%);
 
+}
+
+.todo-obj {
+  width: 80%;
+  height: 50px;
+  border-radius: 10px;
+  position: relative;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.thing {
+  display: flex;
+
+  cursor: pointer;
+  padding-left: 20px;
+  width: 100%;
+
+  span {
+    display: flex;
+    align-items: center;
+    font-family: 'Darumadrop One', cursive;
+    padding-left: 5px;
+    font-size: 1.30em;
+  }
+}
+
+.icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  content: url('../icons/bee.png');
+}
+
+.clicked {
+  content: url("../icons/bee-clicked.png");
+}
+
+.clicked-text {
+  color: rgb(145, 142, 142);
+  text-decoration: line-through;
+}
+
+.category {
+  display: flex;
+  width: 100px;
+  font-family: 'Darumadrop One', cursive;
+  justify-content: flex-end;
 }
