@@ -29,12 +29,16 @@ router.post("/:id", (req, res) => {
   const itemId = req.params.id;
   const category_name = req.body.category_name;
   const completed = req.body.completed;
-  // let setCompleted = undefined; // if not toggling completed, make setCompleted null
   /* req.body is an object like this: 
   {
-    category_name,
+    category_name
+  }
+  or an object like this: 
+  {
     completed
-  } */
+  } 
+  where this edit route can do one or the other exclusively.
+  */
   if (completed === undefined) { // only edit category, and don't toggle completed
     database.editTodoItemCategory(itemId, category_name)
     .then(() => {
