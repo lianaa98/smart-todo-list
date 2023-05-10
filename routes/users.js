@@ -68,4 +68,48 @@ router.get("/me", (req, res) => {
     .catch((e) => res.send(e));
 });
 
+// EDIT (profile)
+router.post("/profile", (req, res) => {
+  const userId = req.session.userId;
+  // edge case: user not logged in, but URL is found
+  if (!userId) {
+    res.status(401).send("Sorry, you do not have access to this URL because you are not logged in.");
+    return;
+  }
+  database.setUserName(req.body.name, userId)
+    .then((user) => {
+
+      // edge case: user is logged in, but user doesn't own the name
+      if (!user) {
+        res.status(403).send("Invalid user id.");
+        return;
+      }
+      res.json({name: user.name});
+    });
+});
+
+// READ (profile)
+router.get("/profile", (req, res) => {
+  const userId = req.session.userId;
+  // edge case: user not logged in, but URL is found
+  if (!userId) {
+    res.status(401).send("Sorry, you do not have access to this URL because you are not logged in.");
+    return;
+  }
+  database.getUserName(userId)
+    .then((user) => {
+
+      // edge case: user is logged in, but user doesn't own the name
+      if (!user) {
+        res.status(403).send("Invalid user id.");
+        return;
+      }
+      res.json(user);
+    });
+});
+
+// router.get('/', (req, res) => {
+//   res.render('users');
+// });
+
 module.exports = router;

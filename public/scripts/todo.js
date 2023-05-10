@@ -64,6 +64,21 @@ function createToDoElement(todoObj) {
   const catId = "c-" + todoId;
   const content = todoObj.content;
   const category = todoObj.category_name;
+  let displayCat;
+
+  if (category === "to-watch") {
+    displayCat = "To Watch";
+  }
+  if (category === "to-read") {
+    displayCat = "To Read";
+  }
+  if (category === "to-eat") {
+    displayCat = "To Eat";
+  }
+  if (category === "to-buy") {
+    displayCat = "To Buy";
+  }
+
   const created_at = todoObj.created_at;
 
   console.log(thingId, catId);
@@ -83,7 +98,7 @@ function createToDoElement(todoObj) {
     </div>
 
     <form class="catform" id=${catId} method="POST" action=${formRoute}>
-    <button type="submit" class="category">${category}</button>
+    <button type="submit" class="category">${displayCat}</button>
     <select class="select-cat" name="category_name">
       <option value="to-watch">To Watch</option>
       <option value="to-read">To Read</option>
@@ -93,7 +108,7 @@ function createToDoElement(todoObj) {
     </form>
 
     <form class="deleteform" method="POST" action=${formRouteDel}>
-      <button>Delete</button>
+      <button class="deleteButton">DELETE</button>
     </form>
 
   </div>
@@ -164,6 +179,37 @@ function tryLoadTodo() {
 
 //------ Category pages ------
 
+function createCatElement(todoObj) {
+  const todoId = todoObj.id;
+
+  const thingId = "t-" + todoId;
+  const catId = "c-" + todoId;
+  const content = todoObj.content;
+  const category = todoObj.category_name;
+
+  const created_at = todoObj.created_at;
+
+  console.log(thingId, catId);
+
+  function escape(str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  const markup = `
+  <div class="todo-obj">
+
+    <div class="thing" id=${thingId}>
+      <img class="icon">
+      <span class="statement">${escape(content)}</span>
+    </div>
+
+  </div>
+  `;
+  return markup;
+}
+
 function renderCatTodo(todoArray, i) {
 
   $(`#todo-${i}`).empty();
@@ -176,7 +222,7 @@ function renderCatTodo(todoArray, i) {
   }
 
   for (const todo of todoArray) {
-    const $todo = createToDoElement(todo);
+    const $todo = createCatElement(todo);
     $(`#todo-${i}`).append($todo);
   }
 }
