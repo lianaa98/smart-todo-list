@@ -45,11 +45,24 @@ router.post('/', async (req, res) => {
 
   const formattedResp = apiResponse.data.choices[0].text.trim().toLowerCase();
 
-  console.log(formattedResp);
+  let output = '';
+  const includesWordAndOutput = {
+    'watch': 'to-watch',
+    'read': 'to-read',
+    'eat': 'to-eat',
+    'buy': 'to-buy',
+  };
+  for (const includesWord in includesWordAndOutput) {
+    if (formattedResp.includes(includesWord)) {
+      output = includesWordAndOutput[includesWord];
+    }
+  }
+
+  console.log('formattedResp:', formattedResp, 'output:', output);
 
   const newToDoThing = {
     content: plaintext,
-    category_name: formattedResp,
+    category_name: output,
     user_id: userId
   }
   
