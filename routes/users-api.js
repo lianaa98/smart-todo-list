@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
   
   database.addTodoItem(newToDoThing).then(() => {  
     return res.status(200).send();
-  })
+  });
 });
 
 module.exports = router;
