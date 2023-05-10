@@ -209,7 +209,7 @@ const addTodoItem = function(todoObj) {
       category_name = todoObj.category_name;
     }
 
-    db.query(`INSERT INTO things (content, category_id, user_id, created_at)
+    return db.query(`INSERT INTO things (content, category_id, user_id, created_at)
     VALUES ($1, (SELECT id FROM categories WHERE categories.name = $2), $3, Now())
     RETURNING *;`, [todoObj.content, category_name, todoObj.user_id])
       .then((result) => {
@@ -226,7 +226,6 @@ const addTodoItem = function(todoObj) {
       .catch((err) => {
         console.log('error:', err.message);
       });
-    return result.rows;
   })
     .catch((err) => {
       console.log('error:', err.message);

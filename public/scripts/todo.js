@@ -39,9 +39,9 @@ $(document).ready(function() {
       url: "/api/users",
       data: $(this).serialize(),
     })
-      .then(function() {
+      .then(function(data) {
         $("#new-todo").val("");
-        console.log("loadTodo() occurring");
+        console.log("loadTodo() occurring where data:", data);
         loadTodo();
       })
       .catch(err => {
