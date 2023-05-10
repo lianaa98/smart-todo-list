@@ -13,7 +13,7 @@ router.post("/logout", (req, res) => {
   req.session = null;
   res.redirect("/login");
   return;
-})
+});
 
 // LOGIN (POST) -> redirects to /users/me
 router.post("/login", (req, res) => {
@@ -59,9 +59,19 @@ router.get("/me", (req, res) => {
         return res.send({ error: "no user with that id" });
       }
 
+      const pfpUrls = {
+        1: 'elephant.png',
+        2: 'hen.png',
+        3: 'shark.png',
+        4: 'sheep.png',
+        5: 'snail.png',
+      };
+
       const templateVars = {
         user: user
       };
+
+      templateVars.pic = pfpUrls[user.avatar_id];
 
       res.render('user_index', templateVars);
     })
@@ -86,7 +96,7 @@ router.post("/profile", (req, res) => {
         res.status(403).send("Invalid user id.");
         return;
       }
-      res.json({name: user.name});
+      res.json({ name: user.name });
     });
 });
 
@@ -105,14 +115,14 @@ router.get("/profile", (req, res) => {
         res.status(403).send("Invalid user id.");
         return;
       }
-      res.render("user_profile");
+
       const pfpUrls = {
-        1: '/elephant.png', 
-        2: '/hen.png', 
-        3: '/shark.png', 
-        4: '/sheep.png', 
-        5: '/snail.png', 
-      }
+        1: '/elephant.png',
+        2: '/hen.png',
+        3: '/shark.png',
+        4: '/sheep.png',
+        5: '/snail.png',
+      };
       user.pfp_value = "/avatars" + pfpUrls[user.avatar_id];
       res.render("user_profile");
     });

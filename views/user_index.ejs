@@ -42,21 +42,23 @@
 
 <body id="userIndexBody">
   <nav>
-    <a href="#content"><p>SMART TODO</p></a>
+    <a href="#content">
+      <p>SMART TODO</p>
+    </a>
     <div id="categories">
       <ul>
         <li><a href="#cat-0">
-          <span>To Watch</span>
-        </a></li>
+            <span>To Watch</span>
+          </a></li>
         <li><a href="#cat-1">
-          <span>To Read</span>
-        </a></li>
+            <span>To Read</span>
+          </a></li>
         <li><a href="#cat-2">
-          <span>To Eat</span>
-        </a></li>
+            <span>To Eat</span>
+          </a></li>
         <li><a href="#cat-3">
-          <span>To Buy</span>
-        </a></li>
+            <span>To Buy</span>
+          </a></li>
       </ul>
     </div>
     <form method="POST" action="/users/logout">
@@ -66,20 +68,29 @@
 
   <div id="content">
     <div id="first-page">
-    <p>
-      Hi, <%= user.name%>
-    </p>
-    <form id="new-todo-form" method="POST" action="/api/users/">
-      <div class="form-group">
-        <label for="new-todo"></label>
-        <input type="text" class="form-control" id="new-todo" name="thing">
+      <div id="user-info">
+        <div id="greeting">
+          <p>Hi,</p>
+          <form>
+            <button id="profile-button">
+              <%= user.name%>
+            </button>
+          </form>
+        </div>
+        <% const imgSrc=`../avatars/${pic}` %>
+          <img id="profile-pic" src=<%=imgSrc%>>
       </div>
-      <button id="todo-button" type="submit" class="btn btn-primary">To Do!</button>
-    </form>
-    <div id="cat-all">
-      <div id="main-todo"></div>
+      <form id="new-todo-form" method="POST" action="/api/users/">
+        <div class="form-group">
+          <label for="new-todo"></label>
+          <input type="text" class="form-control" id="new-todo" name="thing">
+        </div>
+        <button id="todo-button" type="submit" class="btn btn-primary">To Do!</button>
+      </form>
+      <div id="cat-all">
+        <div id="main-todo"></div>
+      </div>
     </div>
-  </div>
     <div id="cat-0">
       <p>To Watch</p>
       <div id="todo-0"></div>
