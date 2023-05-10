@@ -177,9 +177,9 @@ const setUserData = function(userId, userInput) {
     let aQueriedResult;
     for (let i = 0; i < results.length; i++) {
       if (results[i]) {
-        console.log('results['+i+'].rows.length (in if statement):', results[i].rows.length, 'itemName['+i+']:', itemName[i]);
         // Invalid insertion
         if (results[i].rows.length === 0) {
+          console.log('invalid query for setting', itemName[i], results[i].rows);
         } else {
           // valid insertion
           console.log('query for setting '+itemName[i], results[i].rows[0]);
@@ -187,7 +187,6 @@ const setUserData = function(userId, userInput) {
         aQueriedResult = results[i];
       }
     }
-    console.log('aQueriedResult.rows[0]:', aQueriedResult.rows[0]);
     return aQueriedResult.rows[0];
   })
     .catch((err) => {

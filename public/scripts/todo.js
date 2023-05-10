@@ -40,8 +40,9 @@ $(document).ready(function() {
       data: $(this).serialize(),
     })
       .then(function() {
-        loadTodo();
         $("#new-todo").val("");
+        console.log("loadTodo() occurring");
+        loadTodo();
       })
       .catch(err => {
         console.log(err);
@@ -165,6 +166,8 @@ function loadTodo() {
     .then(function(todos) {
 
       renderTodo(todos);
+
+      loadEventHandlers();
       console.log(todos);
     })
     .then(tryLoadEventHandlers)
