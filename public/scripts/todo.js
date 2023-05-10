@@ -40,7 +40,7 @@ $(document).ready(function() {
       data: $(this).serialize(),
     })
       .then(function() {
-        //loadTodo();
+        loadTodo();
         $("#new-todo").val("");
       })
       .catch(err => {
@@ -222,7 +222,7 @@ function renderCatTodo(todoArray, i) {
   }
 
   for (const todo of todoArray) {
-    const $todo = createCatElement(todo);
+    const $todo = createToDoElement(todo);
     $(`#todo-${i}`).append($todo);
   }
 }
