@@ -188,7 +188,7 @@ function loadTodo() {
 
       renderTodo(todos);
 
-      loadEventHandlers(); // probably redundant with tryLoadEventHandlers but doesn't hurt to have
+      //loadEventHandlers(); // probably redundant with tryLoadEventHandlers but doesn't hurt to have
       console.log(todos);
     })
     .then(tryLoadEventHandlers)
