@@ -50,44 +50,39 @@
     <div id="categories">
       <ul>
         <li><a href="#cat-0">
-          <span>To Watch</span>
-        </a></li>
+            <span>To Watch</span>
+          </a></li>
         <li><a href="#cat-1">
-          <span>To Read</span>
-        </a></li>
+            <span>To Read</span>
+          </a></li>
         <li><a href="#cat-2">
-          <span>To Eat</span>
-        </a></li>
+            <span>To Eat</span>
+          </a></li>
         <li><a href="#cat-3">
-          <span>To Buy</span>
-        </a></li>
+            <span>To Buy</span>
+          </a></li>
       </ul>
     </div>
     <form method="POST" action="/users/logout">
       <button type="submit" id="logout" class="button-2">Log out</button>
     </form>
   </nav>
-
   <div id="profile-section">
     <p>Your Profile</p>
     <div id="profile-row">
       <div id="avatar-col">
-        <% const imgSrc = `../avatars/${pic}` %>
-        <img src=<%= imgSrc%>>
-        <form method="GET" action="/users/profile/edit">
-          <button type="submit">Edit profile</button>
-        </form>
+        <% const imgSrc=`../avatars/${pic}` %>
+          <img src=<%=imgSrc%>>
+          <form method="GET" action="/users/profile/edit">
+            <button type="submit">Edit profile</button>
+          </form>
       </div>
-
       <div id="info-col">
         <span>Your Name: <%= user.name%></span>
         <span>Daily Reminder: <%= user.motto%></span>
       </div>
-
     </div>
   </div>
-   
-  
 </body>
 
 </html>

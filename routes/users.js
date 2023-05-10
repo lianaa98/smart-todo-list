@@ -169,8 +169,4 @@ router.get("/profile/edit", (req, res) => {
     });
 });
 
-// router.get('/', (req, res) => {
-//   res.render('users');
-// });
-
 module.exports = router;

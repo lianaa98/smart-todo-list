@@ -17,7 +17,7 @@
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
+
   <!-- App JS -->
   <script src="/scripts/app.js"></script>
 
@@ -45,35 +45,36 @@
     <button id="sign-up-button" class="button-1" role="button">Sign Up</button>
     <button id="log-in-button" class="button-1" role="button">Log In</button>
   </div>
+  
   <!-- User Login/Register Forms (Hidden) -->
 
-    <form id="login-form" method="POST" action="/users/login">
-      <div class="form-group">
-        <label for="loginEmail">Email address</label>
-        <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
-      </div>
-      <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" class="form-control" id="loginPassword" name="password">
-      </div>
-      <button id="sign-in-button" type="submit" class="btn btn-primary">Log in</button>
-    </form>
+  <form id="login-form" method="POST" action="/users/login">
+    <div class="form-group">
+      <label for="loginEmail">Email address</label>
+      <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+      <label for="loginPassword">Password</label>
+      <input type="password" class="form-control" id="loginPassword" name="password">
+    </div>
+    <button id="sign-in-button" type="submit" class="btn btn-primary">Log in</button>
+  </form>
 
-    <form id="register-form" method="POST" action="/users/">
-      <div class="form-group">
-        <label for="loginName">Your name</label>
-        <input type="name" class="form-control" id="loginName" name="name">
-      </div>
-      <div class="form-group">
-        <label for="loginEmail">Email address</label>
-        <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
-      </div>
-      <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" class="form-control" id="loginPassword" name="password">
-      </div>
-      <button id="register-button" type="submit" class="btn btn-primary">Register</button>
-    </form>
+  <form id="register-form" method="POST" action="/users/">
+    <div class="form-group">
+      <label for="loginName">Your name</label>
+      <input type="name" class="form-control" id="loginName" name="name">
+    </div>
+    <div class="form-group">
+      <label for="loginEmail">Email address</label>
+      <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+      <label for="loginPassword">Password</label>
+      <input type="password" class="form-control" id="loginPassword" name="password">
+    </div>
+    <button id="register-button" type="submit" class="btn btn-primary">Register</button>
+  </form>
 
 
 </body>

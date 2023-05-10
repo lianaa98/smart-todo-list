@@ -7,7 +7,6 @@
 
 const express = require('express');
 const router  = express.Router();
-// const userQueries = require('../db/queries/users');
 const database = require('../db/connection');
 
 const { Configuration, OpenAIApi } = require("openai");
@@ -16,7 +15,6 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-
 
 router.post('/', async (req, res) => {
   const userId = req.session.userId;
