@@ -71,12 +71,14 @@ router.get("/me", (req, res) => {
 // EDIT (profile)
 router.post("/profile", (req, res) => {
   const userId = req.session.userId;
+  const userInput = req.body;
+
   // edge case: user not logged in, but URL is found
   if (!userId) {
     res.status(401).send("Sorry, you do not have access to this URL because you are not logged in.");
     return;
   }
-  database.setUserName(req.body.name, userId)
+  database.setUserData(userId, userInput)
     .then((user) => {
 
       // edge case: user is logged in, but user doesn't own the name
@@ -96,14 +98,22 @@ router.get("/profile", (req, res) => {
     res.status(401).send("Sorry, you do not have access to this URL because you are not logged in.");
     return;
   }
-  database.getUserName(userId)
+  database.getUser(userId)
     .then((user) => {
-
       // edge case: user is logged in, but user doesn't own the name
       if (!user) {
         res.status(403).send("Invalid user id.");
         return;
       }
+      res.render("user_profile");
+      const pfpUrls = {
+        1: '/elephant.png', 
+        2: '/hen.png', 
+        3: '/shark.png', 
+        4: '/sheep.png', 
+        5: '/snail.png', 
+      }
+      user.pfp_value = "/avatars" + pfpUrls[user.avatar_id];
       res.render("user_profile");
     });
 });

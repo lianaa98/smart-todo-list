@@ -1,4 +1,5 @@
 // PG database client/connection setup
+const e = require('express');
 const { Pool } = require('pg');
 
 const dbParams = {
@@ -101,21 +102,21 @@ const setUserName = function(name, userId) {
 };
 
 
-const getUserName = function(userId) {
+const getUser = function(userId) {
   return db
     .query(`
-    SELECT name 
+    SELECT name, avatar_id, motto 
     FROM users
     WHERE id = $1;`, [userId])
     .then((result) => {
       // Invalid insertion
       if (result.rows.length === 0) {
-        console.log('invalid query for setting name', result.rows);
+        console.log('invalid query for getting user data', result.rows);
         return null;
       }
 
       // valid insertion
-      console.log('query for setting name', result.rows[0]);
+      console.log('query for setting user data', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -146,25 +147,55 @@ const getUserName = function(userId) {
 //     });
 // };
 
-const setUserProfileImgId = function(profile_img_id, userId) {
-  return db
-    .query(`UPDATE users
+const setUserData = function(userId, userInput) {
+  let setUserNameQuery;
+  let setUserMottoQuery;
+  let setUserPfpValueQuery;
+  if (userInput.name) {
+    setUserNameQuery = db
+      .query(`UPDATE users
     SET name = $1
     WHERE users.id = $2
-    RETURNING *;`, [name, userId])
-    .then((result) => {
-      // Invalid insertion
-      if (result.rows.length === 0) {
-        console.log('invalid query for setting name', result.rows);
-        return null;
+    RETURNING *;`, [userInput.name, userId]);
+  }
+  if (userInput.motto) {
+    setUserMottoQuery = db
+      .query(`UPDATE users
+    SET motto = $1
+    WHERE users.id = $2
+    RETURNING *;`, [userInput.motto, userId]);
+  }
+  if (userInput.pfp_value) {
+    setUserPfpValueQuery = db
+      .query(`UPDATE users
+    SET avatar_id = $1
+    WHERE users.id = $2
+    RETURNING *;`, [userInput.pfp_value, userId]);
+  }
+  return Promise.all([setUserNameQuery, setUserMottoQuery, setUserPfpValueQuery]).then((results) => {
+    console.log('Promises running');
+    const itemName = ['name', 'motto', 'pfp_value']; // name corresponding to result
+    let aQueriedResult;
+    console.log('results:', results);
+    for (let i = 0; i < results.length; i++) {
+      console.log('results['+i+']:', results[i]);
+      if (results[i]) {
+        console.log('results['+i+'].rows.length (in if statement):', results[i].rows.length, 'itemName['+i+']:', itemName[i]);
+        // Invalid insertion
+        if (results[i].rows.length === 0) {
+          console.log('invalid query for setting', itemName[i], results[i].rows);
+        } else {
+          // valid insertion
+          console.log('query for setting '+itemName[i], results[i].rows[0]);
+        }
+        aQueriedResult = results[i];
       }
-
-      // valid insertion
-      console.log('query for setting name', result.rows[0]);
-      return result.rows[0];
-    })
+    }
+    console.log('aQueriedResult.rows[0]:', aQueriedResult.rows[0]);
+    return aQueriedResult.rows[0];
+  })
     .catch((err) => {
-      console.log(err.message);
+      console.log("error:", err.message);
     });
 };
 
@@ -304,8 +335,8 @@ module.exports = {
   getUserWithId,
   addUser,
   setUserName,
-  getUserName,
-  setUserProfileImgId,
+  getUser,
+  setUserData,
   addTodoItem,
   getAllTodoItems,
   getTodoItemsByCategory,
