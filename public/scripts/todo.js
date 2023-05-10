@@ -148,10 +148,8 @@ function loadEventHandlers() {
               
               // toggle icon and text "clicked" class
               if ($(this).hasClass("icon")) {
-                // console.log('toggled clicked on', $(this));
                 $(this).toggleClass("clicked");
               } else {
-                // console.log('toggled clicked-text on', $(this));
                 $(this).toggleClass("clicked-text");
               }
             });
