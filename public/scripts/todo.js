@@ -172,7 +172,7 @@ function loadEventHandlers() {
           const $catForm = $(this);
           $catForm.children('.select-cat').on('change', function() {
             //console.log('catForm attr:', $catForm.attr('action'), 'selected value:', $(this).find(":selected").val())
-            //$catForm.trigger( 'submit' );
+            $catForm.trigger( 'submit' );
           }); 
         }
       });
