@@ -112,7 +112,9 @@ function createToDoElement(todoObj) {
     </form>
 
     <form class="deleteform" method="POST" action=${formRouteDel}>
-      <button class="deleteButton">DELETE</button>
+      <button class="deleteButton">
+      <img src="/icons/trash.png">
+      </button>
     </form>
 
   </div>
