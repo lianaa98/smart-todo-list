@@ -66,8 +66,9 @@ router.post('/', async (req, res) => {
     user_id: userId
   }
   
-  database.addTodoItem(newToDoThing).then(() => {  
-    return res.status(200).send();
+  database.addTodoItem(newToDoThing).then((result) => {  
+    console.log("insertion seen in users-api.js:", result);
+    return res.status(200).send("added!");
   })
 });
 
