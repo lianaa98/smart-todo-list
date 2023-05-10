@@ -151,6 +151,7 @@
   
   #first-page{
     min-height: 100vh;
+    scroll-snap-align: start;
   }
 
   p {
@@ -258,19 +259,23 @@
 
 
 #cat-0 {
+  scroll-snap-align: start;
   min-height: 100vh;
   background-color:#3D348B;
 }
 #cat-1 {
+  scroll-snap-align: start;
   min-height: 100vh;
   background: rgb(195, 124, 34);
   background: linear-gradient(288deg, rgba(195, 124, 34, 1) 0%, rgba(253, 187, 45, 1) 100%);
 }
 #cat-2 {
+  scroll-snap-align: start;
   min-height: 100vh;
   background-color:#3D348B;
 }
 #cat-3 {
+  scroll-snap-align: start;
   min-height: 100vh;
   background: rgb(195, 124, 34);
   background: linear-gradient(288deg, rgba(195, 124, 34, 1) 0%, rgba(253, 187, 45, 1) 100%);

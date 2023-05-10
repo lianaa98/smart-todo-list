@@ -2,6 +2,8 @@
 html {
   box-sizing: border-box;
   margin: 0;
+  scroll-snap-type: mandatory;
+  scroll-snap-type: y mandatory;
 }
 
 *,
