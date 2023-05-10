@@ -32,7 +32,7 @@ router.post("/login", (req, res) => {
 // REGISTER (POST) -> redirects to /users/me
 router.post("/", (req, res) => {
   const user = req.body;
-  console.log(user);
+
   database
     .addUser(user)
     .then((user) => {
@@ -82,8 +82,6 @@ router.get("/me", (req, res) => {
 router.post("/profile", (req, res) => {
   const userId = req.session.userId;
   const userInput = req.body;
-
-  console.log("req:", req.body);
 
   // edge case: user not logged in, but URL is found
   if (!userId) {
@@ -167,14 +165,8 @@ router.get("/profile/edit", (req, res) => {
 
       templateVars.pic = pfpUrls[user.avatar_id];
 
-      console.log(templateVars);
-
       res.render("user_profile_edit", templateVars);
     });
 });
-
-// router.get('/', (req, res) => {
-//   res.render('users');
-// });
 
 module.exports = router;

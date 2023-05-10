@@ -10,11 +10,9 @@ $selectbox.on("change", changeImageSelection);
 function changeImageSelection() {
   // change the `selection` variable to the selected option
   selection = $selectbox.val();
-  console.log(selection);
   // add a '.loading' class to the $imageContainer
   $imagecontainer.addClass("loading");
   // clear the $imageContainer's selected option
-  console.log($imagecontainer[0]);
   $imagecontainer[0].dataset.selected = null;
 
   // set a timout of 1.5 seconds

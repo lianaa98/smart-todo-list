@@ -7,7 +7,6 @@
 
 const express = require('express');
 const router  = express.Router();
-// const userQueries = require('../db/queries/users');
 const database = require('../db/connection');
 
 const { Configuration, OpenAIApi } = require("openai");
@@ -16,7 +15,6 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-
 
 router.post('/', async (req, res) => {
   const userId = req.session.userId;
@@ -58,8 +56,6 @@ router.post('/', async (req, res) => {
     }
   }
 
-  console.log('formattedResp:', formattedResp, 'output:', output);
-
   const newToDoThing = {
     content: plaintext,
     category_name: output,
@@ -67,7 +63,6 @@ router.post('/', async (req, res) => {
   }
   
   database.addTodoItem(newToDoThing).then((result) => {  
-    console.log("insertion seen in users-api.js:", result);
     return res.status(200).send("added!");
   })
 });

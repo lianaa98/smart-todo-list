@@ -19,8 +19,8 @@
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   <!-- App JS -->
-  <script defer src="/scripts/network.js"></script>
   <script defer src="/scripts/profile_edit.js"></script>
 
   <!-- Google Font -->
@@ -82,14 +82,14 @@
         <option value="5">Snail</option>
       </select>
 
-      <% const avatar_link = `/avatars/${pic}` %>
-      
-      <div class="pfp-images" data-selected="">
-        <span class="loader">loading image...</span>
-        <div class="no-selection">
-          <img id="myAvatar" src=<%= avatar_link %> >
-        <span class="no-selection">Your current image</span>
-        </div>
+      <% const avatar_link=`/avatars/${pic}` %>
+
+        <div class="pfp-images" data-selected="">
+          <span class="loader">loading image...</span>
+          <div class="no-selection">
+            <img id="myAvatar" src=<%=avatar_link %> >
+            <span class="no-selection">Your current image</span>
+          </div>
           <img src="/avatars/elephant.png" data-image="1" alt="Elephant" title="Elephant" />
           <img src="/avatars/hen.png" data-image="2" alt="Hen" title="Hen" />
           <img src="/avatars/shark.png" data-image="3" alt="Shark" title="Shark" />
@@ -109,11 +109,8 @@
         <button id="edit-button" type="submit">Submit</button>
     </form>
   </div>
-
   </div>
   </div>
-
-
 </body>
 
 </html>

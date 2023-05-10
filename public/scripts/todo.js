@@ -7,7 +7,6 @@ let loadedCount = 0; // one count for the main todo, and each category todo load
 const COUNT_BEFORE_LOAD_TODO = 5;
 
 $(document).ready(function() {
-  console.log("document is ready!");
   loadTodo();
   loadCategory(0);
   loadCategory(1);
@@ -41,7 +40,7 @@ $(document).ready(function() {
     })
       .then(function(data) {
         $("#new-todo").val("");
-        // console.log("loadTodo() occurring where data:", data);
+
         loadTodo();
         loadCategory(0);
         loadCategory(1);
@@ -88,8 +87,6 @@ function createToDoElement(todoObj) {
   }
 
   const created_at = todoObj.created_at;
-
-  console.log(thingId, catId);
 
   function escape(str) {
     let div = document.createElement("div");
@@ -171,29 +168,23 @@ function loadEventHandlers() {
         }
       });
 
-
-      // Drop-downs
+      // Drop-downs ----
+      
       $(".todo-obj").children().each(function() {
         // monitor form button
         if ($(this).hasClass("catform")) {
           const $catForm = $(this);
           $catForm.children('.select-cat').on('change', function() {
-            //console.log('catForm attr:', $catForm.attr('action'), 'selected value:', $(this).find(":selected").val())
             $catForm.trigger( 'submit' );
           }); 
         }
       });
-      
-    console.log('Loaded event handlers!');
 }
 
 function loadTodo() {
   $.ajax("/todo-items/", { method: "GET" })
     .then(function(todos) {
-
       renderTodo(todos);
-
-      console.log(todos);
     })
     .then(tryLoadEventHandlers)
     .catch(err => {
@@ -231,7 +222,6 @@ function renderCatTodo(todoArray, i) {
 function loadCategory(index) {
 
   let cat;
-  console.log(index);
 
   if (index === 0) {
     cat = "to-watch";
