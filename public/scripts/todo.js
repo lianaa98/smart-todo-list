@@ -1,4 +1,11 @@
 // Client facing scripts here
+
+// ===========
+// Globals
+// ===========
+let loadedCount = 0; // one count for the main todo, and each category todo loaded
+const COUNT_BEFORE_LOAD_TODO = 5;
+
 $(document).ready(function() {
   console.log("document is ready!");
   loadTodo();
@@ -119,14 +126,8 @@ function renderTodo(todoArray) {
   }
 }
 
-function loadTodo() {
-
-  $.ajax("/todo-items/", { method: "GET" })
-    .then(function(todos) {
-
-      renderTodo(todos);
-      console.log(todos);
-
+function loadEventHandlers() {
+  
       // Bee icons----
 
       $(".todo-obj").children().each(function() {
@@ -150,19 +151,34 @@ function loadTodo() {
         // monitor form button
         if ($(this).hasClass("catform")) {
           $(this).on('submit', function(event) {
-            if($(".select-cat").is(":hidden")) {
+            if ($(".select-cat").is(":hidden")) {
               event.preventDefault();
               $(".select-cat").slideDown();
             }
-          })
+          });
         }
-      })
+      });
+}
+
+function loadTodo() {
+  $.ajax("/todo-items/", { method: "GET" })
+    .then(function(todos) {
+
+      renderTodo(todos);
+      console.log(todos);
     })
+    .then(tryLoadEventHandlers)
     .catch(err => {
       console.log(err);
     });
 };
 
+function tryLoadEventHandlers() {
+  loadedCount++;
+  if(loadedCount === COUNT_BEFORE_LOAD_TODO) {
+    loadEventHandlers();
+  }
+}
 
 //------ Category pages ------
 
@@ -209,7 +225,7 @@ function renderCatTodo(todoArray, i) {
   }
 
   for (const todo of todoArray) {
-    const $todo = createCatElement(todo);
+    const $todo = createToDoElement(todo);
     $(`#todo-${i}`).append($todo);
   }
 }
@@ -251,8 +267,9 @@ function loadCategory(index) {
         }
       });
     })
+    .then(tryLoadEventHandlers)
     .catch(err => {
       console.log(err);
     });
 
-}
+};
