@@ -105,7 +105,6 @@ router.get("/profile", (req, res) => {
         res.status(403).send("Invalid user id.");
         return;
       }
-      res.render("user_profile");
       const pfpUrls = {
         1: '/elephant.png', 
         2: '/hen.png', 
