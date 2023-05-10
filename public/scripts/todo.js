@@ -149,7 +149,6 @@ function loadEventHandlers() {
                 $(this).toggleClass("clicked");
               } else {
                 $(this).toggleClass("clicked-text");
-
               }
             });
           });
@@ -190,7 +189,6 @@ function loadTodo() {
 
       renderTodo(todos);
 
-      //loadEventHandlers(); // probably redundant with tryLoadEventHandlers but doesn't hurt to have
       console.log(todos);
     })
     .then(tryLoadEventHandlers)
@@ -208,37 +206,6 @@ function tryLoadEventHandlers() {
 }
 
 //------ Category pages ------
-
-function createCatElement(todoObj) {
-  const todoId = todoObj.id;
-
-  const thingId = "t-" + todoId;
-  const catId = "c-" + todoId;
-  const content = todoObj.content;
-  const category = todoObj.category_name;
-
-  const created_at = todoObj.created_at;
-
-  console.log(thingId, catId);
-
-  function escape(str) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  }
-
-  const markup = `
-  <div class="todo-obj">
-
-    <div class="thing" id=${thingId}>
-      <img class="icon">
-      <span class="statement">${escape(content)}</span>
-    </div>
-
-  </div>
-  `;
-  return markup;
-}
 
 function renderCatTodo(todoArray, i) {
 
