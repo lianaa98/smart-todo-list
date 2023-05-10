@@ -72,11 +72,8 @@
   <div id="profile-section">
     <p>Editing Profile...</p>
 
-    <form id="info-col">
-
-
-
-      <select id="selectbox" data-selected="">
+    <form id="info-form" method="POST" action="/users/profile">
+      <select id="selectbox" data-selected="" name="pfp_value">
         <option value="" selected="selected" disabled="disabled">Select your profile picture</option>
         <option value="1">Elephant</option>
         <option value="2">Hen</option>
@@ -96,14 +93,16 @@
           <img src="/avatars/snail.png" data-image="5" alt="Snail" title="Snail" />
         </div>
 
-        <!-- <img id="pfp-now" src=<%= imgSrc%>> -->
-
-
-        <p>Your Name:
-          <%= user.name%>
+        <p>
+          Your Name:
+          <input type="text" name="name" placeholder=<%=user.name%>>
         </p>
-        <p>Daily Reminder: <%= user.motto%></p>
+        <p>
+          Daily Reminder:
+          <input type="text" name="motto" placeholder=<%=user.motto%>>
+        </p>
 
+        <button id="edit-button" type="submit">Submit</button>
     </form>
   </div>
 

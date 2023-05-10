@@ -83,6 +83,8 @@ router.post("/profile", (req, res) => {
   const userId = req.session.userId;
   const userInput = req.body;
 
+  console.log("req:", req.body);
+
   // edge case: user not logged in, but URL is found
   if (!userId) {
     res.status(401).send("Sorry, you do not have access to this URL because you are not logged in.");
@@ -135,6 +137,7 @@ router.get("/profile", (req, res) => {
     });
 });
 
+// Edit profile page
 router.get("/profile/edit", (req, res) => {
   const userId = req.session.userId;
   // edge case: user not logged in, but URL is found
