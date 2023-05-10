@@ -17,6 +17,18 @@ body {
 
   padding: 10px 10px 10px 10px;
 
+  #index-button{
+    outline: none;
+    border: none;
+    background: none;
+  }
+
+  #index-button:hover {
+    color: white;
+    text-shadow: -6px 4px 6px rgba(11, 36, 255, 0.77);
+    cursor: pointer;
+  }
+
   a {
     color: black;
     text-decoration: none;
