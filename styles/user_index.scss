@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  width: 100%;
 
   nav {
     display: flex;
@@ -170,24 +171,24 @@
       font-size: 3em;
     }
 
-      #profile-button {
-        background-image: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
-        border: none;
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        outline: none;
-      }
-  
-      #profile-button:hover {
-        cursor: pointer;
-        animation: shake 0.5s;
-        outline: none;
-      }
+    #profile-button {
+      background-image: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+      border: none;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      outline: none;
+    }
 
-      #profile-button:active {
-        outline: none;
-      }
+    #profile-button:hover {
+      cursor: pointer;
+      animation: shake 0.5s;
+      outline: none;
+    }
+
+    #profile-button:active {
+      outline: none;
+    }
 
   }
 
@@ -250,7 +251,7 @@
   margin-top: 30px;
   margin-right: 50px;
   display: flex;
-  
+
   width: 100px;
   height: 100px;
 }
@@ -322,8 +323,7 @@
 }
 
 
-.category,
-.deleteButton {
+.category {
   display: flex;
   width: 100px;
   font-family: 'Darumadrop One', cursive;
@@ -354,6 +354,28 @@
   box-shadow: -3px 5px 1px 2px #ffd23d;
 }
 
+.deleteButton {
+
+  outline: none;
+  border: none;
+  background: none;
+
+  img {
+    width: 40px;
+  }
+
+}
+
+.deleteButton:hover {
+  cursor: pointer;
+  outline: none;
+}
+
+.deleteButton:active {
+  transform: scale(0.9, 0.9);
+  outline: none;
+
+}
 
 #cat-0 {
   min-height: 100vh;
@@ -379,4 +401,14 @@
 
 .select-cat {
   display: none;
+}
+
+marquee {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2em;
+  mix-blend-mode: difference;
 }

@@ -12,3 +12,5 @@
 <a href="https://www.flaticon.com/free-icons/elephant" title="elephant icons">Elephant icons created by Freepik - Flaticon</a>
 
 <a href="https://www.flaticon.com/free-icons/sheep" title="sheep icons">Sheep icons created by Freepik - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/delete" title="delete icons">Delete icons created by Arkinasi - Flaticon</a>
