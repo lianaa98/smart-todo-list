@@ -41,7 +41,7 @@ $(document).ready(function() {
     })
       .then(function(data) {
         $("#new-todo").val("");
-        console.log("loadTodo() occurring where data:", data);
+        // console.log("loadTodo() occurring where data:", data);
         loadTodo();
         loadCategory(0);
         loadCategory(1);
@@ -145,6 +145,8 @@ function loadEventHandlers() {
         if ($(this).hasClass("thing")) {
           $(this).on('click', function() {
             $(this).children().each(function() {
+              
+              // toggle icon and text "clicked" class
               if ($(this).hasClass("icon")) {
                 $(this).toggleClass("clicked");
               } else {
@@ -181,6 +183,8 @@ function loadEventHandlers() {
           }); 
         }
       });
+      
+    console.log('Loaded event handlers!');
 }
 
 function loadTodo() {
@@ -246,20 +250,6 @@ function loadCategory(index) {
     .then(function(todos) {
 
       renderCatTodo(todos, index);
-
-      $(".todo-obj").children().each(function() {
-        if ($(this).hasClass("thing")) {
-          $(this).on('click', function() {
-            $(this).children().each(function() {
-              if ($(this).hasClass("icon")) {
-                $(this).toggleClass("clicked");
-              } else {
-                $(this).toggleClass("clicked-text");
-              }
-            });
-          });
-        }
-      });
     })
     .then(tryLoadEventHandlers)
     .catch(err => {
