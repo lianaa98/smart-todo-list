@@ -14,8 +14,6 @@ $(document).ready(function() {
   loadCategory(2);
   loadCategory(3);
 
-  loadEvents();
-
   //=======================================
   //  Navbar Animation                    ||
   //=======================================
