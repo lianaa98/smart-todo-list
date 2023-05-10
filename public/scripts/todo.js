@@ -1,4 +1,11 @@
 // Client facing scripts here
+
+// ===========
+// Globals
+// ===========
+let loadedCount = 0; // one count for the main todo, and each category todo loaded
+const COUNT_BEFORE_LOAD_TODO = 5;
+
 $(document).ready(function() {
   console.log("document is ready!");
   loadTodo();
@@ -33,7 +40,7 @@ $(document).ready(function() {
       data: $(this).serialize(),
     })
       .then(function() {
-        loadTodo();
+        //loadTodo();
         $("#new-todo").val("");
       })
       .catch(err => {
@@ -105,7 +112,6 @@ function renderTodo(todoArray) {
 }
 
 function loadTodo() {
-
   $.ajax("/todo-items/", { method: "GET" })
     .then(function(todos) {
 
@@ -135,19 +141,26 @@ function loadTodo() {
         // monitor form button
         if ($(this).hasClass("catform")) {
           $(this).on('submit', function(event) {
-            if($(".select-cat").is(":hidden")) {
+            if ($(".select-cat").is(":hidden")) {
               event.preventDefault();
               $(".select-cat").slideDown();
             }
-          })
+          });
         }
-      })
+      });
     })
+    .then(tryLoadTodo)
     .catch(err => {
       console.log(err);
     });
 };
 
+function tryLoadTodo() {
+  loadedCount++;
+  if(loadedCount === COUNT_BEFORE_LOAD_TODO) {
+    loadTodo();
+  }
+}
 
 //------ Category pages ------
 
@@ -205,8 +218,9 @@ function loadCategory(index) {
         }
       });
     })
+    .then(tryLoadTodo)
     .catch(err => {
       console.log(err);
     });
 
-}
+};
