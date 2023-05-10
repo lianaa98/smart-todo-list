@@ -14,13 +14,14 @@
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/user_index.css" />
+  <link rel="stylesheet" href="/styles/user_profile.css" />
+  <link rel="stylesheet" href="/styles/user_profile_edit.css" />
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- App JS -->
-  <script src="/scripts/todo.js"></script>
   <script defer src="/scripts/network.js"></script>
+  <script defer src="/scripts/profile_edit.js"></script>
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,11 +41,13 @@
 
 </head>
 
-<body id="userIndexBody">
+<body>
   <nav>
-    <a href="#content">
-      <p>SMART TODO</p>
-    </a>
+    <form method="GET" action="/users/me">
+      <button id="index-button" type="submit">
+        <p>SMART TODO</p>
+      </button>
+    </form>
     <div id="categories">
       <ul>
         <li><a href="#cat-0">
@@ -66,48 +69,47 @@
     </form>
   </nav>
 
-  <div id="content">
-    <div id="first-page">
-      <div id="user-info">
-        <div id="greeting">
-          <p>Hi,</p>
-          <form method="GET" action="/users/profile">
-            <button id="profile-button">
-              <%= user.name%>
-            </button>
-          </form>
+  <div id="profile-section">
+    <p>Editing Profile...</p>
+
+    <form id="info-form" method="POST" action="/users/profile">
+      <select id="selectbox" data-selected="" name="pfp_value">
+        <option value="" selected="selected" disabled="disabled">Select your profile picture</option>
+        <option value="1">Elephant</option>
+        <option value="2">Hen</option>
+        <option value="3">Shark</option>
+        <option value="4">Sheep</option>
+        <option value="5">Snail</option>
+      </select>
+
+      <% const imgSrc=`/avatars/${pic}` %>
+        <div class="pfp-images" data-selected="">
+          <span class="loader">loading image...</span>
+          <span class="no-selection">no image selected</span>
+          <img src="/avatars/elephant.png" data-image="1" alt="Elephant" title="Elephant" />
+          <img src="/avatars/hen.png" data-image="2" alt="Hen" title="Hen" />
+          <img src="/avatars/shark.png" data-image="3" alt="Shark" title="Shark" />
+          <img src="/avatars/sheep.png" data-image="4" alt="Sheep" title="Sheep" />
+          <img src="/avatars/snail.png" data-image="5" alt="Snail" title="Snail" />
         </div>
-        <% const imgSrc=`../avatars/${pic}` %>
-          <img id="profile-pic" src=<%=imgSrc%>>
-      </div>
-      <form id="new-todo-form" method="POST" action="/api/users/">
-        <div class="form-group">
-          <label for="new-todo"></label>
-          <input type="text" class="form-control" id="new-todo" name="thing">
-        </div>
-        <button id="todo-button" type="submit" class="btn btn-primary">To Do!</button>
-      </form>
-      <div id="cat-all">
-        <div id="main-todo"></div>
-      </div>
-    </div>
-    <div id="cat-0">
-      <p>To Watch</p>
-      <div id="todo-0"></div>
-    </div>
-    <div id="cat-1">
-      <p>To Read</p>
-      <div id="todo-1"></div>
-    </div>
-    <div id="cat-2">
-      <p>To Eat</p>
-      <div id="todo-2"></div>
-    </div>
-    <div id="cat-3">
-      <p>To Buy</p>
-      <div id="todo-3"></div>
-    </div>
+
+        <p>
+          Your Name:
+          <input type="text" name="name" placeholder=<%=user.name%>>
+        </p>
+        <p>
+          Daily Reminder:
+          <input type="text" name="motto" placeholder=<%=user.motto%>>
+        </p>
+
+        <button id="edit-button" type="submit">Submit</button>
+    </form>
   </div>
+
+  </div>
+  </div>
+
+
 </body>
 
 </html>

@@ -22,7 +22,7 @@
       color: black;
       text-decoration: none;
     }
-    
+
     a:hover {
       color: white;
       text-shadow: -6px 4px 6px rgba(11, 36, 255, 0.77);
@@ -59,14 +59,14 @@
       -webkit-user-select: none;
       touch-action: manipulation;
     }
-    
+
     .button-2:hover {
       background-position: right center;
       /* change the direction of the change here */
       color: #fff;
       text-decoration: none;
     }
-    
+
     .button-2:active {
       transform: scale(0.95);
     }
@@ -148,9 +148,93 @@
   background: linear-gradient(288deg, rgba(195, 124, 34, 1) 0%, rgba(253, 187, 45, 1) 100%);
 
   width: 100%;
-  
-  #first-page{
+
+  #first-page {
     min-height: 100vh;
+  }
+
+  #user-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    #greeting {
+      display: flex;
+    }
+
+    form {
+      display: flex;
+      padding-left: 5px;
+      padding-top: 30px;
+      font-family: 'Darumadrop One', cursive;
+      font-size: 3em;
+    }
+
+      #profile-button {
+        background-image: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+        border: none;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        outline: none;
+      }
+  
+      #profile-button:hover {
+        cursor: pointer;
+        animation: shake 0.5s;
+        outline: none;
+      }
+
+      #profile-button:active {
+        outline: none;
+      }
+
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+      transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+      transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+      transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+      transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+      transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+      transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+      transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+      transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+      transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+      transform: translate(1px, -2px) rotate(-1deg);
+    }
   }
 
   p {
@@ -162,7 +246,20 @@
 
 }
 
-#main-todo, #todo-0, #todo-1, #todo-2, #todo-3 {
+#profile-pic {
+  margin-top: 30px;
+  margin-right: 50px;
+  display: flex;
+  
+  width: 100px;
+  height: 100px;
+}
+
+#main-todo,
+#todo-0,
+#todo-1,
+#todo-2,
+#todo-3 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -225,7 +322,8 @@
 }
 
 
-.category, .deleteButton {
+.category,
+.deleteButton {
   display: flex;
   width: 100px;
   font-family: 'Darumadrop One', cursive;
@@ -259,17 +357,20 @@
 
 #cat-0 {
   min-height: 100vh;
-  background-color:#3D348B;
+  background-color: #3D348B;
 }
+
 #cat-1 {
   min-height: 100vh;
   background: rgb(195, 124, 34);
   background: linear-gradient(288deg, rgba(195, 124, 34, 1) 0%, rgba(253, 187, 45, 1) 100%);
 }
+
 #cat-2 {
   min-height: 100vh;
-  background-color:#3D348B;
+  background-color: #3D348B;
 }
+
 #cat-3 {
   min-height: 100vh;
   background: rgb(195, 124, 34);
