@@ -59,10 +59,8 @@ app.get('/', (req, res) => {
   const userId = req.session.userId;
   const templateVars = {};
 
-  console.log(userId);
   // When user is logged out
   if (!userId) {
-    console.log('Logged out');
     res.redirect("/login");
     return;
   }
