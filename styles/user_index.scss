@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  width: 100%;
 
   nav {
     display: flex;
@@ -400,4 +401,14 @@
 
 .select-cat {
   display: none;
+}
+
+marquee {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2em;
+  mix-blend-mode: difference;
 }
