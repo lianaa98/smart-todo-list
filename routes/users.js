@@ -98,7 +98,7 @@ router.post("/profile", (req, res) => {
         res.status(403).send("Invalid user id.");
         return;
       }
-      res.json({ name: user.name });
+      res.redirect("/users/profile");
     });
 });
 
