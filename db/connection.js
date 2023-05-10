@@ -205,7 +205,7 @@ const addTodoItem = function(todoObj) {
     }
     else {
       // valid query
-      console.log('query', result.rows[0]);
+      // console.log('query', result.rows[0]);
       category_name = todoObj.category_name;
     }
 
@@ -242,7 +242,7 @@ const getTodoItemsByCategory = (user_id, category_name) => {
     ORDER BY created_at;`, [user_id, category_name])
     .then((result) => {
       // valid query
-      console.log('query', result.rows);
+      // console.log('query', result.rows);
       return result.rows;
     })
     .catch((err) => {
@@ -266,7 +266,7 @@ const getAllTodoItems = (user_id) => {
       }
 
       // valid query
-      console.log('query', result.rows);
+      // console.log('query', result.rows);
       return result.rows;
     })
     .catch((err) => {
