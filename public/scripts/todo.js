@@ -92,7 +92,7 @@ function createToDoElement(todoObj) {
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
-
+  
   const markup = `
   <div class="todo-obj">
 
@@ -104,10 +104,10 @@ function createToDoElement(todoObj) {
     <form class="catform" id=${catId} method="POST" action=${formRoute}>
     <button type="submit" class="category">${displayCat}</button>
     <select class="select-cat" name="category_name">
-      <option value="to-watch">To Watch</option>
-      <option value="to-read">To Read</option>
-      <option value="to-eat">To Eat</option>
-      <option value="to-buy">To Buy</option>
+      <option value="to-watch"${(category === "to-watch")?` selected`:``}>To Watch</option>
+      <option value="to-read"${(category === "to-read")?` selected`:``}>To Read</option>
+      <option value="to-eat"${(category === "to-eat")?` selected`:``}>To Eat</option>
+      <option value="to-buy"${(category === "to-buy")?` selected`:``}>To Buy</option>
     </select>
     </form>
 
@@ -117,6 +117,7 @@ function createToDoElement(todoObj) {
 
   </div>
   `;
+  
   return markup;
 }
 
