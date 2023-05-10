@@ -79,6 +79,9 @@ function createToDoElement(todoObj) {
   if (category === "to-buy") {
     displayCat = "To Buy";
   }
+  if (category === "others") {
+    displayCat = "Others";
+  }
 
   const created_at = todoObj.created_at;
 
