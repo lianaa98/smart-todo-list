@@ -43,7 +43,6 @@ const todoItemsRoutes = require('./routes/todo-items');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/todo-items', todoItemsRoutes);
 // Note: mount other resources here, using the same pattern above
