@@ -82,10 +82,14 @@
         <option value="5">Snail</option>
       </select>
 
-      <% const imgSrc=`/avatars/${pic}` %>
-        <div class="pfp-images" data-selected="">
-          <span class="loader">loading image...</span>
-          <span class="no-selection">no image selected</span>
+      <% const avatar_link = `/avatars/${pic}` %>
+      
+      <div class="pfp-images" data-selected="">
+        <span class="loader">loading image...</span>
+        <div class="no-selection">
+          <img id="myAvatar" src=<%= avatar_link %> >
+        <span class="no-selection">Your current image</span>
+        </div>
           <img src="/avatars/elephant.png" data-image="1" alt="Elephant" title="Elephant" />
           <img src="/avatars/hen.png" data-image="2" alt="Hen" title="Hen" />
           <img src="/avatars/shark.png" data-image="3" alt="Shark" title="Shark" />
@@ -95,11 +99,11 @@
 
         <p>
           Your Name:
-          <input type="text" name="name" placeholder=<%=user.name%>>
+          <input id="username" type="text" name="name" placeholder=<%=user.name%>>
         </p>
         <p>
           Daily Reminder:
-          <input type="text" name="motto" placeholder=<%=user.motto%>>
+          <input id="usermotto" type="text" name="motto" placeholder=<%=user.motto%>>
         </p>
 
         <button id="edit-button" type="submit">Submit</button>

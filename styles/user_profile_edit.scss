@@ -25,13 +25,16 @@
     font-weight: bold;
   }
   &[data-selected=""]:not(.loading) {
-    background: #eee;
+    // background: #eee;
     .no-selection {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
   &.loading {
     background: #eee;
+    opacity: 0.5;
     .loader {
       display: block;
       animation: loading 1.5s linear;
@@ -41,6 +44,7 @@
   img {
     width: 80%;
   }
+
 }
 @for $i from 1 through 5 {
   .pfp-images[data-selected="#{$i}"] {
@@ -58,6 +62,48 @@
 
 #edit-button {
   margin-left: 250px;
+
+  width: 100px;
+  margin-top: 10px;
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 -4px 4px 0 0;
+  color: #422800;
+  font-family: 'Darumadrop One', cursive;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 20px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  &:hover {
+    background-color: #fff;
+  }
+
+  &:active {
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
 }
 
+#username, #usermotto {
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 2px black solid;
 
+  &:active {
+    outline: none;
+  }
+}
+
+#myAvatar {
+  width: 60%;
+  height: 60%;
+  display: flex;
+}
