@@ -14,6 +14,8 @@ $(document).ready(function() {
   loadCategory(2);
   loadCategory(3);
 
+  loadEvents();
+
   //=======================================
   //  Navbar Animation                    ||
   //=======================================
@@ -126,13 +128,8 @@ function renderTodo(todoArray) {
   }
 }
 
-function loadTodo() {
-  $.ajax("/todo-items/", { method: "GET" })
-    .then(function(todos) {
-
-      renderTodo(todos);
-      console.log(todos);
-
+function loadEventHandlers() {
+  
       // Bee icons----
 
       $(".todo-obj").children().each(function() {
@@ -163,17 +160,25 @@ function loadTodo() {
           });
         }
       });
+}
+
+function loadTodo() {
+  $.ajax("/todo-items/", { method: "GET" })
+    .then(function(todos) {
+
+      renderTodo(todos);
+      console.log(todos);
     })
-    .then(tryLoadTodo)
+    .then(tryLoadEventHandlers)
     .catch(err => {
       console.log(err);
     });
 };
 
-function tryLoadTodo() {
+function tryLoadEventHandlers() {
   loadedCount++;
   if(loadedCount === COUNT_BEFORE_LOAD_TODO) {
-    loadTodo();
+    loadEventHandlers();
   }
 }
 
@@ -264,7 +269,7 @@ function loadCategory(index) {
         }
       });
     })
-    .then(tryLoadTodo)
+    .then(tryLoadEventHandlers)
     .catch(err => {
       console.log(err);
     });
