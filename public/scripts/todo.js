@@ -142,6 +142,8 @@ function loadEventHandlers() {
         if ($(this).hasClass("thing")) {
           $(this).on('click', function() {
             $(this).children().each(function() {
+              
+              // toggle icon and text "clicked" class
               if ($(this).hasClass("icon")) {
                 $(this).toggleClass("clicked");
               } else {
@@ -177,6 +179,8 @@ function loadEventHandlers() {
           }); 
         }
       });
+      
+    console.log('Loaded event handlers!');
 }
 
 function loadTodo() {
@@ -238,20 +242,6 @@ function loadCategory(index) {
     .then(function(todos) {
 
       renderCatTodo(todos, index);
-
-      $(".todo-obj").children().each(function() {
-        if ($(this).hasClass("thing")) {
-          $(this).on('click', function() {
-            $(this).children().each(function() {
-              if ($(this).hasClass("icon")) {
-                $(this).toggleClass("clicked");
-              } else {
-                $(this).toggleClass("clicked-text");
-              }
-            });
-          });
-        }
-      });
     })
     .then(tryLoadEventHandlers)
     .catch(err => {
