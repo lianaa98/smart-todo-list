@@ -104,7 +104,7 @@ router.get("/profile", (req, res) => {
         res.status(403).send("Invalid user id.");
         return;
       }
-      res.json(user);
+      res.render("user_profile");
     });
 });
 

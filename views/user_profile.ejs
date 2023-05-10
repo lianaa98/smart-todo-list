@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Smart TODO!</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    type="text/css" />
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/user_profile.css" />
+
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- App JS -->
+  <script src="/scripts/todo.js"></script>
+  <script defer src="/scripts/network.js"></script>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Darumadrop+One&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <nav>
+    <a href="#content"><p>SMART TODO</p></a>
+    <div id="categories">
+      <ul>
+        <li><a href="#cat-0">
+          <span>To Watch</span>
+        </a></li>
+        <li><a href="#cat-1">
+          <span>To Read</span>
+        </a></li>
+        <li><a href="#cat-2">
+          <span>To Eat</span>
+        </a></li>
+        <li><a href="#cat-3">
+          <span>To Buy</span>
+        </a></li>
+      </ul>
+    </div>
+    <form method="POST" action="/users/logout">
+      <button type="submit" id="logout" class="button-2">Log out</button>
+    </form>
+  </nav>
+
+  <div id="profile-section">
+    <p>Your Profile</p>
+    <div id="profile-row">
+      <div id="avatar-col">
+        <img src="../avatars/elephant.png">
+        <button>Edit profile</button>
+      </div>
+
+      <div id="info-col">
+        <span>Your Name: Cinnamon</span>
+        <span>Daily Reminder: Don't forget to drink more water!</span>
+      </div>
+
+    </div>
+  </div>
+   
+  
+</body>
+
+</html>
