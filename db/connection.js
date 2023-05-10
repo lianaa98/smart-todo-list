@@ -28,7 +28,6 @@ const getUserWithEmail = (email) => {
       }
 
       // email found
-      console.log('query', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -50,7 +49,6 @@ const getUserWithId = function(id) {
       }
 
       // id found
-      console.log('query for id', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -71,7 +69,6 @@ const addUser = function(user) {
       }
 
       // valid insertion
-      console.log('query for insertion', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -93,7 +90,6 @@ const setUserName = function(name, userId) {
       }
 
       // valid insertion
-      console.log('query for setting name', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -116,36 +112,12 @@ const getUser = function(userId) {
       }
 
       // valid insertion
-      console.log('query for setting user data', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
       console.log(err.message);
     });
 };
-
-
-// const getUserImgProfilePic = function(userId) {
-//   return db
-//     .query(`
-//     SELECT name 
-//     FROM users
-//     WHERE id = $1;`, [userId])
-//     .then((result) => {
-//       // Invalid insertion
-//       if (result.rows.length === 0) {
-//         console.log('invalid query for setting name', result.rows);
-//         return null;
-//       }
-
-//       // valid insertion
-//       console.log('query for setting name', result.rows[0]);
-//       return result.rows[0];
-//     })
-//     .catch((err) => {
-//       console.log(err.message);
-//     });
-// };
 
 const setUserData = function(userId, userInput) {
   let setUserNameQuery;
@@ -205,7 +177,6 @@ const addTodoItem = function(todoObj) {
     }
     else {
       // valid query
-      // console.log('query', result.rows[0]);
       category_name = todoObj.category_name;
     }
 
@@ -220,7 +191,6 @@ const addTodoItem = function(todoObj) {
         }
 
         // valid insertion
-        console.log('query for insertion', result.rows[0]);
         return result.rows[0];
       })
       .catch((err) => {
@@ -242,7 +212,6 @@ const getTodoItemsByCategory = (user_id, category_name) => {
     ORDER BY created_at;`, [user_id, category_name])
     .then((result) => {
       // valid query
-      // console.log('query', result.rows);
       return result.rows;
     })
     .catch((err) => {
@@ -266,7 +235,6 @@ const getAllTodoItems = (user_id) => {
       }
 
       // valid query
-      // console.log('query', result.rows);
       return result.rows;
     })
     .catch((err) => {
