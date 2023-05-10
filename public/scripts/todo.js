@@ -163,6 +163,19 @@ function loadEventHandlers() {
           });
         }
       });
+
+
+      // Drop-downs
+      $(".todo-obj").children().each(function() {
+        // monitor form button
+        if ($(this).hasClass("catform")) {
+          const $catForm = $(this);
+          $catForm.children('.select-cat').on('change', function() {
+            //console.log('catForm attr:', $catForm.attr('action'), 'selected value:', $(this).find(":selected").val())
+            //$catForm.trigger( 'submit' );
+          }); 
+        }
+      });
 }
 
 function loadTodo() {
