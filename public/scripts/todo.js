@@ -188,6 +188,7 @@ function loadTodo() {
     .then(function(todos) {
 
       renderTodo(todos);
+
       console.log(todos);
     })
     .then(tryLoadEventHandlers)
