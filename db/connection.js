@@ -173,25 +173,29 @@ const setUserData = function(userId, userInput) {
     RETURNING *;`, [userInput.pfp_value, userId]);
   }
   return Promise.all([setUserNameQuery, setUserMottoQuery, setUserPfpValueQuery]).then((results) => {
+    console.log('Promises running');
     const itemName = ['name', 'motto', 'pfp_value']; // name corresponding to result
     let aQueriedResult;
+    console.log('results:', results);
     for (let i = 0; i < results.length; i++) {
+      console.log('results['+i+']:', results[i]);
       if (results[i]) {
+        console.log('results['+i+'].rows.length (in if statement):', results[i].rows.length, 'itemName['+i+']:', itemName[i]);
         // Invalid insertion
         if (results[i].rows.length === 0) {
-          console.log('invalid query for setting', itemName[i], results.rows);
-        }
-        else {
+          console.log('invalid query for setting', itemName[i], results[i].rows);
+        } else {
           // valid insertion
-          console.log('query for setting', itemName[i], results.rows[0]);
+          console.log('query for setting '+itemName[i], results[i].rows[0]);
         }
         aQueriedResult = results[i];
       }
     }
-    return aQueriedResult;
+    console.log('aQueriedResult.rows[0]:', aQueriedResult.rows[0]);
+    return aQueriedResult.rows[0];
   })
     .catch((err) => {
-      console.log(err.message);
+      console.log("error:", err.message);
     });
 };
 

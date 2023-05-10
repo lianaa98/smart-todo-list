@@ -113,7 +113,7 @@ router.get("/profile", (req, res) => {
         5: '/snail.png', 
       }
       user.pfp_value = "/avatars" + pfpUrls[user.avatar_id];
-      res.json(user);
+      res.render("user_profile", pfpUrls);
     });
 });
 
