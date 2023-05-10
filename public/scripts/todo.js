@@ -41,7 +41,7 @@ $(document).ready(function() {
     })
       .then(function(data) {
         $("#new-todo").val("");
-        console.log("loadTodo() occurring where data:", data);
+        // console.log("loadTodo() occurring where data:", data);
         loadTodo();
         loadCategory(0);
         loadCategory(1);
@@ -148,10 +148,10 @@ function loadEventHandlers() {
               
               // toggle icon and text "clicked" class
               if ($(this).hasClass("icon")) {
-                console.log('toggled clicked on', $(this));
+                // console.log('toggled clicked on', $(this));
                 $(this).toggleClass("clicked");
               } else {
-                console.log('toggled clicked-text on', $(this));
+                // console.log('toggled clicked-text on', $(this));
                 $(this).toggleClass("clicked-text");
               }
             });
