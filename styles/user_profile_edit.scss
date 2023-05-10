@@ -25,13 +25,16 @@
     font-weight: bold;
   }
   &[data-selected=""]:not(.loading) {
-    background: #eee;
+    // background: #eee;
     .no-selection {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
   &.loading {
     background: #eee;
+    opacity: 0.5;
     .loader {
       display: block;
       animation: loading 1.5s linear;
@@ -97,4 +100,10 @@
   &:active {
     outline: none;
   }
+}
+
+#myAvatar {
+  width: 60%;
+  height: 60%;
+  display: flex;
 }
