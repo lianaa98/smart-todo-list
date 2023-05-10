@@ -43,6 +43,10 @@ $(document).ready(function() {
         $("#new-todo").val("");
         console.log("loadTodo() occurring where data:", data);
         loadTodo();
+        loadCategory(0);
+        loadCategory(1);
+        loadCategory(2);
+        loadCategory(3);
       })
       .catch(err => {
         console.log(err);
@@ -184,7 +188,7 @@ function loadTodo() {
 
       renderTodo(todos);
 
-      loadEventHandlers();
+      loadEventHandlers(); // probably redundant with tryLoadEventHandlers but doesn't hurt to have
       console.log(todos);
     })
     .then(tryLoadEventHandlers)
@@ -195,8 +199,9 @@ function loadTodo() {
 
 function tryLoadEventHandlers() {
   loadedCount++;
-  if(loadedCount === COUNT_BEFORE_LOAD_TODO) {
+  if(loadedCount === COUNT_BEFORE_LOAD_TODO) { // for the initial loading
     loadEventHandlers();
+    loadedCount = 0; // reset
   }
 }
 
