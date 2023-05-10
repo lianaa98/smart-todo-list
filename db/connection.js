@@ -152,10 +152,7 @@ const setUserData = function(userId, userInput) {
         // Invalid insertion
         if (results[i].rows.length === 0) {
           console.log('invalid query for setting', itemName[i], results[i].rows);
-        } else {
-          // valid insertion
-          console.log('query for setting '+itemName[i], results[i].rows[0]);
-        }
+        } 
         aQueriedResult = results[i];
       }
     }

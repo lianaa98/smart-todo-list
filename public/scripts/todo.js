@@ -168,8 +168,8 @@ function loadEventHandlers() {
         }
       });
 
-
-      // Drop-downs
+      // Drop-downs ----
+      
       $(".todo-obj").children().each(function() {
         // monitor form button
         if ($(this).hasClass("catform")) {
@@ -179,8 +179,6 @@ function loadEventHandlers() {
           }); 
         }
       });
-      
-    console.log('Loaded event handlers!');
 }
 
 function loadTodo() {
