@@ -1,0 +1,59 @@
+#selectbox {
+  display: flex;
+  width: 300px;
+  margin-left: 250px;
+}
+
+.pfp-images {
+  margin-left: 250px;
+  margin-top: 15px;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #eeeeee52;
+  overflow: hidden;
+
+
+  img,
+  .loader,
+  .no-selection {
+    display: none;
+    letter-spacing: .15em;
+    font-weight: bold;
+  }
+  &[data-selected=""]:not(.loading) {
+    background: #eee;
+    .no-selection {
+      display: block;
+    }
+  }
+  &.loading {
+    background: #eee;
+    .loader {
+      display: block;
+      animation: loading 1.5s linear;
+    }
+  }
+
+  img {
+    width: 80%;
+  }
+}
+@for $i from 1 through 5 {
+  .pfp-images[data-selected="#{$i}"] {
+    img[data-image="#{$i}"] {
+      display: block;
+    }
+  }
+}
+
+@keyframes loading {
+  to {
+    letter-spacing: .25em;
+  }
+}
+
+

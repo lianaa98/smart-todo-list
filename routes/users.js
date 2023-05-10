@@ -108,6 +108,7 @@ router.get("/profile", (req, res) => {
     res.status(401).send("Sorry, you do not have access to this URL because you are not logged in.");
     return;
   }
+  
   database.getUser(userId)
     .then((user) => {
       // edge case: user is logged in, but user doesn't own the name
@@ -117,14 +118,56 @@ router.get("/profile", (req, res) => {
       }
 
       const pfpUrls = {
-        1: '/elephant.png',
-        2: '/hen.png',
-        3: '/shark.png',
-        4: '/sheep.png',
-        5: '/snail.png',
+        1: 'elephant.png',
+        2: 'hen.png',
+        3: 'shark.png',
+        4: 'sheep.png',
+        5: 'snail.png',
       };
-      user.pfp_value = "/avatars" + pfpUrls[user.avatar_id];
-      res.render("user_profile");
+
+      const templateVars = {
+        user: user
+      };
+
+      templateVars.pic = pfpUrls[user.avatar_id];
+
+      res.render("user_profile", templateVars);
+    });
+});
+
+router.get("/profile/edit", (req, res) => {
+  const userId = req.session.userId;
+  // edge case: user not logged in, but URL is found
+  if (!userId) {
+    res.status(401).send("Sorry, you do not have access to this URL because you are not logged in.");
+    return;
+  }
+  
+  database.getUser(userId)
+    .then((user) => {
+      // edge case: user is logged in, but user doesn't own the name
+      if (!user) {
+        res.status(403).send("Invalid user id.");
+        return;
+      }
+
+      const pfpUrls = {
+        1: 'elephant.png',
+        2: 'hen.png',
+        3: 'shark.png',
+        4: 'sheep.png',
+        5: 'snail.png',
+      };
+
+      const templateVars = {
+        user: user
+      };
+
+      templateVars.pic = pfpUrls[user.avatar_id];
+
+      console.log(templateVars);
+
+      res.render("user_profile_edit", templateVars);
     });
 });
 
