@@ -147,7 +147,9 @@ function loadEventHandlers() {
             const itemElementId = $(this).attr('id');
             const itemId = itemElementId.substring(2); // cut off the 't-' part
             console.log('itemElementId:', itemElementId, 'itemId:', itemId);
-            $(this).children().each(function() {
+
+            // HTML markup shouldn't have two of the same id, will keep that in mind for next time
+            $(`[id=${itemElementId}]`).children().each(function() {
 
               // toggle icon and text "clicked" class and completed POST
               if ($(this).hasClass("icon")) {
@@ -162,7 +164,7 @@ function loadEventHandlers() {
                 const dataQueryString = `completed=${completedBool}`;
                 $.post(`/todo-items/${itemId}`, dataQueryString);
               } else {
-                $(this).toggleClass("clicked-text");
+                $($(this)).toggleClass("clicked-text");
               }
             });
           });
