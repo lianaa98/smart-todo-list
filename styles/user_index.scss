@@ -342,6 +342,7 @@
   justify-content: center;
   align-items: center;
   margin-left: 10px;
+  border-radius: 10px;
 
   background: none;
   border: none;
@@ -353,7 +354,6 @@
   font-family: 'Darumadrop One', cursive;
   height: 48px;
   touch-action: manipulation;
-
 }
 
 .category:active {
@@ -363,7 +363,7 @@
 
 .category:hover {
   outline: 0;
-  box-shadow: -3px 5px 1px 2px #ffd23d;
+  box-shadow: -6px 5px 0px 2px #ffd23d;
 }
 
 .deleteButton {
