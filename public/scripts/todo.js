@@ -33,6 +33,8 @@ $(document).ready(function() {
   $("#new-todo-form").on('submit', function(event) {
     event.preventDefault();
 
+    $(".meter").show();
+
     $.ajax({
       type: "POST",
       url: "/api/users",
@@ -40,6 +42,7 @@ $(document).ready(function() {
     })
       .then(function(data) {
         $("#new-todo").val("");
+        $(".meter").slideUp();
 
         loadMainTodo();
         loadCategory(0);
