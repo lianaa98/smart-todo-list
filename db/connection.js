@@ -206,7 +206,7 @@ const getTodoItemsByCategory = (user_id, category_name) => {
     LEFT JOIN categories ON category_id = categories.id
     WHERE user_id = $1
     AND category_id = (SELECT id FROM categories WHERE categories.name = $2)
-    ORDER BY created_at;`, [user_id, category_name])
+    ORDER BY completed_at NULLS FIRST, created_at;`, [user_id, category_name])
     .then((result) => {
       // valid query
       return result.rows;
@@ -222,7 +222,7 @@ const getAllTodoItems = (user_id) => {
     FROM things
     LEFT JOIN categories ON category_id = categories.id
     WHERE user_id = $1
-    ORDER BY created_at;`, [user_id])
+    ORDER BY completed_at NULLS FIRST, created_at;`, [user_id])
     .then((result) => {
 
       // invalid/empty query
