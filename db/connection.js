@@ -218,7 +218,7 @@ const getTodoItemsByCategory = (user_id, category_name) => {
 
 const getAllTodoItems = (user_id) => {
   return db
-    .query(`SELECT things.id, content, categories.name AS category_name, created_at
+    .query(`SELECT things.id, content, categories.name AS category_name, created_at, completed_at
     FROM things
     LEFT JOIN categories ON category_id = categories.id
     WHERE user_id = $1

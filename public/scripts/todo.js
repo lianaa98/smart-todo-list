@@ -7,7 +7,7 @@ let loadedCount = 0; // one count for the main todo, and each category todo load
 const COUNT_BEFORE_LOAD_TODO = 5;
 
 $(document).ready(function() {
-  loadTodo();
+  loadMainTodo();
   loadCategory(0);
   loadCategory(1);
   loadCategory(2);
@@ -41,7 +41,7 @@ $(document).ready(function() {
       .then(function(data) {
         $("#new-todo").val("");
 
-        loadTodo();
+        loadMainTodo();
         loadCategory(0);
         loadCategory(1);
         loadCategory(2);
@@ -68,6 +68,8 @@ function createToDoElement(todoObj) {
   const catId = "c-" + todoId;
   const content = todoObj.content;
   const category = todoObj.category_name;
+  const completed_at = todoObj.completed_at;
+
   let displayCat;
 
   if (category === "to-watch") {
@@ -98,8 +100,8 @@ function createToDoElement(todoObj) {
   <div class="todo-obj">
 
     <div class="thing" id=${thingId}>
-      <img class="icon">
-      <span class="statement">${escape(content)}</span>
+      <img class="icon${(completed_at)?` clicked`:``}">
+      <span class="statement${(completed_at)?` clicked-text`:``}">${escape(content)}</span>
     </div>
 
     <form class="catform" id=${catId} method="POST" action=${formRoute}>
@@ -141,11 +143,24 @@ function loadEventHandlers() {
       $(".todo-obj").children().each(function() {
         if ($(this).hasClass("thing")) {
           $(this).on('click', function() {
+            // toggle completed
+            const itemElementId = $(this).attr('id');
+            const itemId = itemElementId.substring(2); // cut off the 't-' part
+            console.log('itemElementId:', itemElementId, 'itemId:', itemId);
             $(this).children().each(function() {
-              
-              // toggle icon and text "clicked" class
+
+              // toggle icon and text "clicked" class and completed POST
               if ($(this).hasClass("icon")) {
-                $(this).toggleClass("clicked");
+                let completedBool = '';
+                if(!$(this).hasClass("clicked")) {
+                  completedBool = 'true';
+                  $(this).addClass("clicked");
+                } else {
+                  completedBool = 'false';
+                  $(this).removeClass("clicked");
+                }
+                const dataQueryString = `completed=${completedBool}`;
+                $.post(`/todo-items/${itemId}`, dataQueryString);
               } else {
                 $(this).toggleClass("clicked-text");
               }
@@ -181,7 +196,7 @@ function loadEventHandlers() {
       });
 }
 
-function loadTodo() {
+function loadMainTodo() {
   $.ajax("/todo-items/", { method: "GET" })
     .then(function(todos) {
       renderTodo(todos);
