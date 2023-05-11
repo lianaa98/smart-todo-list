@@ -50,18 +50,34 @@
     </form>
     <div id="categories">
       <ul>
-        <li><a href="#cat-0">
-            <span>To Watch</span>
-          </a></li>
-        <li><a href="#cat-1">
-            <span>To Read</span>
-          </a></li>
-        <li><a href="#cat-2">
-            <span>To Eat</span>
-          </a></li>
-        <li><a href="#cat-3">
+        <li>
+          <form method="GET" action="/users/me#cat-0">
+            <button class="nav-cat-button" type="submit">
+              <span>To Watch</span>
+            </button>
+          </form>
+        </li>
+        <li>
+          <form method="GET" action="/users/me#cat-1">
+            <button class="nav-cat-button" type="submit">
+              <span>To Read</span>
+            </button>
+          </form>
+        </li>
+        <li>
+          <form method="GET" action="/users/me#cat-2">
+            <button class="nav-cat-button" type="submit">
+              <span>To Eat</span>
+            </button>
+          </form>
+        </li>
+        <li>
+          <form method="GET" action="/users/me#cat-3">
+            <button class="nav-cat-button" type="submit">
             <span>To Buy</span>
-          </a></li>
+          </button>
+        </form>
+      </li>
       </ul>
     </div>
     <form method="POST" action="/users/logout">

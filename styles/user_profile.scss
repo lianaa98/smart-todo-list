@@ -17,16 +17,16 @@ body {
 
   padding: 10px 10px 10px 10px;
 
-  #index-button{
+  #index-button, .nav-cat-button{
     outline: none;
     border: none;
     background: none;
-  }
 
-  #index-button:hover {
+    &:hover {
     color: white;
     text-shadow: -6px 4px 6px rgba(11, 36, 255, 0.77);
     cursor: pointer;
+    }
   }
 
   a {
