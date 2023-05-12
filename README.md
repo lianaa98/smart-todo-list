@@ -22,11 +22,11 @@ This is a midterm project for Web Development Bootcamp at Lighthouse Labs, compl
 
 ### User can `edit`, `delete`, and `complete` their to-do items
 
-![](/docs/edit-delete-complete.gif)
+![](/docs/edit-delete-completing.gif)
 
 ### User can `select` their profile picture && `create` their daily reminder
 
-![](/docs/profile.gif)
+![](/docs/profile-edit.gif)
 
 
 ## Tech Stack
