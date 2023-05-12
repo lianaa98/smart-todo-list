@@ -6,7 +6,7 @@ This is a midterm project for Web Development Bootcamp at Lighthouse Labs, compl
 
 ### User Registration, Login / Logout
 
-![](/docs/login-register.gif)
+![](/docs/register-login.gif)
 
 ### User can `create` their to-do items
 
@@ -18,7 +18,7 @@ This is a midterm project for Web Development Bootcamp at Lighthouse Labs, compl
   * To Eat
   * To Buy  
 
-![](/docs/auto-categorized.gif)
+![](/docs/auto-categorization.gif)
 
 ### User can `edit`, `delete`, and `complete` their to-do items
 
