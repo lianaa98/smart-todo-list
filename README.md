@@ -7,10 +7,10 @@ This is a midterm project for Web Development Bootcamp at Lighthouse Labs, compl
 ### User Registration, Login / Logout
 
 ![](/docs/login-register.gif)
-<img src="/docs/login-register.gif" width="600px">
 
 ### User can `create` their to-do items
-<img src="add-todo.gif" width="600px">
+
+![](/docs/add-todo.gif)
 
 ### To-do items are `auto-categorized`
   * To Watch
