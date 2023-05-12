@@ -4,16 +4,29 @@ This is a midterm project for Web Development Bootcamp at Lighthouse Labs, compl
 
 ## App Features
 
-- User Registration, Login / Logout
-- User can `create` their to-do items
-- To-do items are `auto-categorized`
+### User Registration, Login / Logout
+
+![](/docs/login-register.gif)
+
+### User can `create` their to-do items
+![](/docs/create-items.gif)
+
+### To-do items are `auto-categorized`
   * To Watch
   * To Read
   * To Eat
   * To Buy  
-- User can `edit`, `delete`, and `complete` their to-do items
-- User can `select` their profile picture
-- User can create their daily reminder 
+
+![](/docs/auto-categorized.gif)
+
+### User can `edit`, `delete`, and `complete` their to-do items
+
+![](/docs/edit-delete-complete.gif)
+
+### User can `select` their profile picture && `create` their daily reminder
+
+![](/docs/profile.gif)
+
 
 ## Tech Stack
 - HTML
@@ -23,6 +36,9 @@ This is a midterm project for Web Development Bootcamp at Lighthouse Labs, compl
 - SASS
 - Express
 - EJS
+
+## API
+- Open AI
 
 ## Getting Started
 - Fork and clone this repository
