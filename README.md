@@ -2,6 +2,10 @@
 ## Smart TO-DO List
 This is a midterm project for Web Development Bootcamp at Lighthouse Labs, completed within 1 week. Contributors include [Jacob Lim](https://github.com/abeljlim) and [Liana Kan](https://github.com/lianaa98).
 
+This app is hosted on Heroku using Elephant SQL as the database. Link as below. This is a demo so please do not put in personal information / real password, as it is stored in plain-text.
+
+🔗 [Smart TODO](https://smart-todo.lianaa98.me) 🔗
+
 ## App Features
 
 ### User Registration, Login / Logout
